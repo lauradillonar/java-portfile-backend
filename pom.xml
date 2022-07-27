@@ -12,7 +12,7 @@
 	<artifactId>portfile</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>portfile</name>
-	<description>Portfile project for Spring Boot</description>
+	<description>Portfile Project for Spring Boot</description>
 	<properties>
 		<java.version>18</java.version>
 	</properties>
@@ -25,7 +25,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -39,8 +38,18 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.12.0</version>
 		</dependency>
 	</dependencies>
 
@@ -54,3 +63,15 @@
 	</build>
 
 </project>
+
+
+
+
+
+
+
+
+
+
+
+
