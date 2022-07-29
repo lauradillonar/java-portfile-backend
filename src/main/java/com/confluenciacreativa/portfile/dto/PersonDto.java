@@ -1,34 +1,53 @@
-package com.confluenciacreativa.portfile.domain;
+package com.confluenciacreativa.portfile.dto;
 
-import java.time.LocalDateTime;
+import javax.validation.constraints.NotBlank;
 
-public class Person {
+public class PersonDto {
 
-    private Integer idPerson;
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String lastname;
+
+    @NotBlank
     private String userName;
-    private LocalDateTime birthdate;
+
+    @NotBlank
+    private String birthdate;
+
+    @NotBlank
     private String nationality;
+
+    @NotBlank
     private String email;
+
+    @NotBlank
     private String password;
+
+    @NotBlank
     private String phone;
+
+    @NotBlank
     private String aboutMe;
+
+    @NotBlank
     private String job;
+
     private String imageHeader;
     private String image;
     private String logoSrc;
     private String logoAlt;
     private String logoUrl;
 
-    public Person() {
+    public PersonDto() {
     }
 
-    public Person(
+    public PersonDto(
             String name,
             String lastname,
             String userName,
-            LocalDateTime birthdate,
+            String birthdate,
             String nationality,
             String email,
             String password,
@@ -57,14 +76,6 @@ public class Person {
         this.logoUrl = logoUrl;
     }
 
-    public Integer getIdPerson() {
-        return idPerson;
-    }
-
-    public void setIdPerson(Integer idPerson) {
-        this.idPerson = idPerson;
-    }
-
     public String getName() {
         return name;
     }
@@ -89,11 +100,11 @@ public class Person {
         this.userName = userName;
     }
 
-    public LocalDateTime getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(LocalDateTime birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 
