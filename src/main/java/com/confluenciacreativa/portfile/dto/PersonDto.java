@@ -29,16 +29,26 @@ public class PersonDto {
     private String phone;
 
     @NotBlank
+    private String aboutMeSub;
+
+    @NotBlank
     private String aboutMe;
 
     @NotBlank
     private String job;
+
+    @NotBlank
+    private String location;
 
     private String imageHeader;
     private String image;
     private String logoSrc;
     private String logoAlt;
     private String logoUrl;
+
+    private String facebook;
+    private String instagram;
+    private String twitter;
 
     public PersonDto() {
     }
@@ -52,13 +62,18 @@ public class PersonDto {
             String email,
             String password,
             String phone,
+            String aboutMeSub,
             String aboutMe,
             String job,
+            String location,
             String imageHeader,
             String image,
             String logoSrc,
             String logoAlt,
-            String logoUrl) {
+            String logoUrl,
+            String facebook,
+            String instagram,
+            String twitter) {
         this.name = name;
         this.lastname = lastname;
         this.userName = userName;
@@ -67,13 +82,18 @@ public class PersonDto {
         this.email = email;
         this.password = password;
         this.phone = phone;
+        this.aboutMeSub = aboutMeSub;
         this.aboutMe = aboutMe;
         this.job = job;
+        this.location = location;
         this.imageHeader = imageHeader;
         this.image = image;
         this.logoSrc = logoSrc;
         this.logoAlt = logoAlt;
         this.logoUrl = logoUrl;
+        this.facebook = facebook;
+        this.instagram = instagram;
+        this.twitter = twitter;
     }
 
     public String getName() {
@@ -140,6 +160,14 @@ public class PersonDto {
         this.phone = phone;
     }
 
+    public String getAboutMeSub() {
+        return aboutMeSub;
+    }
+
+    public void setAboutMeSub(String aboutMeSub) {
+        this.aboutMeSub = aboutMeSub;
+    }
+
     public String getAboutMe() {
         return aboutMe;
     }
@@ -154,6 +182,14 @@ public class PersonDto {
 
     public void setJob(String job) {
         this.job = job;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getImageHeader() {
@@ -194,5 +230,29 @@ public class PersonDto {
 
     public void setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
+    public String getInstagram() {
+        return instagram;
+    }
+
+    public void setInstagram(String instagram) {
+        this.instagram = instagram;
+    }
+
+    public String getTwitter() {
+        return twitter;
+    }
+
+    public void setTwitter(String twitter) {
+        this.twitter = twitter;
     }
 }

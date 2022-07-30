@@ -21,13 +21,18 @@ public interface PersonMapper {
             @Mapping(source = "emailDB", target = "email"),
             @Mapping(source = "passwordDB", target = "password"),
             @Mapping(source = "phoneDB", target = "phone"),
+            @Mapping(source = "aboutMeSubDB", target = "aboutMeSub"),
             @Mapping(source = "aboutMeDB", target = "aboutMe"),
             @Mapping(source = "jobDB", target = "job"),
+            @Mapping(source = "locationDB", target = "location"),
             @Mapping(source = "imageHeaderDB", target = "imageHeader"),
             @Mapping(source = "imageDB", target = "image"),
             @Mapping(source = "logoSrcDB", target = "logoSrc"),
             @Mapping(source = "logoAltDB", target = "logoAlt"),
             @Mapping(source = "logoUrlDB", target = "logoUrl"),
+            @Mapping(source = "facebookDB", target = "facebook"),
+            @Mapping(source = "instagramDB", target = "instagram"),
+            @Mapping(source = "twitterDB", target = "twitter")
     })
     Person toPerson(PersonDB personDB);
     List<Person> toPersons(List<PersonDB> personsDB);

@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/persons")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PersonController {
 
     @Autowired
@@ -60,6 +61,8 @@ public class PersonController {
             return new ResponseEntity(new Message("La contraseña es requerida"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(personDto.getPhone()))
             return new ResponseEntity(new Message("El teléfono es requerido"), HttpStatus.BAD_REQUEST);
+        if(StringUtils.isBlank(personDto.getAboutMeSub()))
+            return new ResponseEntity(new Message("Una breve descripción es requerida"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(personDto.getAboutMe()))
             return new ResponseEntity(new Message("Una breve descripción es requerida"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(personDto.getJob()))
@@ -68,6 +71,8 @@ public class PersonController {
             return new ResponseEntity(new Message("Ese nombre de usuario ya existe"), HttpStatus.BAD_REQUEST);
         if(personService.existsByEmail(personDto.getEmail()))
             return new ResponseEntity(new Message("Ese email ya existe"), HttpStatus.BAD_REQUEST);
+        if(StringUtils.isBlank(personDto.getLocation()))
+            return new ResponseEntity(new Message("El lugar es requerido"), HttpStatus.BAD_REQUEST);
         Person person = new Person(
                                 personDto.getName(),
                                 personDto.getLastname(),
@@ -77,13 +82,18 @@ public class PersonController {
                                 personDto.getEmail(),
                                 personDto.getPassword(),
                                 personDto.getPhone(),
+                                personDto.getAboutMeSub(),
                                 personDto.getAboutMe(),
                                 personDto.getJob(),
+                                personDto.getLocation(),
                                 personDto.getImageHeader(),
                                 personDto.getImage(),
                                 personDto.getLogoSrc(),
                                 personDto.getLogoAlt(),
-                                personDto.getLogoUrl()
+                                personDto.getLogoUrl(),
+                                personDto.getFacebook(),
+                                personDto.getInstagram(),
+                                personDto.getTwitter()
         );
         personService.save(person);
         return new ResponseEntity(new Message("Persona creada"), HttpStatus.CREATED);
@@ -124,10 +134,14 @@ public class PersonController {
             return new ResponseEntity(new Message("La contraseña es requerida"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(personDto.getPhone()))
             return new ResponseEntity(new Message("El teléfono es requerido"), HttpStatus.BAD_REQUEST);
+        if(StringUtils.isBlank(personDto.getAboutMeSub()))
+            return new ResponseEntity(new Message("Una frase breve es requerida"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(personDto.getAboutMe()))
             return new ResponseEntity(new Message("Una descripción breve es requerida"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(personDto.getJob()))
             return new ResponseEntity(new Message("La profesión es requerida"), HttpStatus.BAD_REQUEST);
+        if(StringUtils.isBlank(personDto.getLocation()))
+            return new ResponseEntity(new Message("El lugar es requerido"), HttpStatus.BAD_REQUEST);
 
         Person person = personService.getPerson(idPerson).get();
         person.setName(personDto.getName());
@@ -138,13 +152,18 @@ public class PersonController {
         person.setEmail(personDto.getEmail());
         person.setPassword(personDto.getPassword());
         person.setPhone(personDto.getPhone());
+        person.setAboutMeSub(personDto.getAboutMeSub());
         person.setAboutMe(personDto.getAboutMe());
         person.setJob(personDto.getJob());
+        person.setLocation(personDto.getLocation());
         person.setImageHeader(personDto.getImageHeader());
         person.setImage(personDto.getImage());
         person.setLogoSrc(personDto.getLogoSrc());
         person.setLogoAlt(personDto.getLogoAlt());
         person.setLogoUrl(personDto.getLogoUrl());
+        person.setFacebook(personDto.getFacebook());
+        person.setInstagram(personDto.getInstagram());
+        person.setTwitter(personDto.getTwitter());
 
         personService.save(person);
         return new ResponseEntity(new Message("Datos actualizados"), HttpStatus.OK);

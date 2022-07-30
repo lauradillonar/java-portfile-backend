@@ -48,12 +48,20 @@ public class PersonDB {
     private String phoneDB;
 
     @NotNull
-    @Column (name = "about")
+    @Column (name = "about_sub")
+    private String aboutMeSubDB;
+
+    @NotNull
+    @Column (name = "about", columnDefinition = "VARCHAR(3000)")
     private String aboutMeDB;
 
     @NotNull
     @Column (name = "work")
     private String jobDB;
+
+    @NotNull
+    @Column (name = "from_location")
+    private String locationDB;
 
     @Column (name = "image_bg_header")
     private String imageHeaderDB;
@@ -70,6 +78,15 @@ public class PersonDB {
     @Column (name = "logo_url")
     private String logoUrlDB;
 
+    @Column (name = "facebook_link")
+    private String facebookDB;
+
+    @Column (name = "instagram_link")
+    private String instagramDB;
+
+    @Column (name = "twitter_link")
+    private String twitterDB;
+
     public PersonDB() {
     }
 
@@ -82,8 +99,10 @@ public class PersonDB {
             String emailDB,
             String passwordDB,
             String phoneDB,
+            String aboutMeSubDB,
             String aboutMeDB,
-            String jobDB) {
+            String jobDB,
+            String locationDB) {
         this.nameDB = nameDB;
         this.lastnameDB = lastnameDB;
         this.userNameDB = userNameDB;
@@ -92,8 +111,10 @@ public class PersonDB {
         this.emailDB = emailDB;
         this.passwordDB = passwordDB;
         this.phoneDB = phoneDB;
+        this.aboutMeSubDB = aboutMeSubDB;
         this.aboutMeDB = aboutMeDB;
         this.jobDB = jobDB;
+        this.locationDB = locationDB;
     }
 
     public PersonDB(
@@ -105,13 +126,18 @@ public class PersonDB {
             String emailDB,
             String passwordDB,
             String phoneDB,
+            String aboutMeSubDB,
             String aboutMeDB,
             String jobDB,
+            String locationDB,
             String imageHeaderDB,
             String imageDB,
             String logoSrcDB,
             String logoAltDB,
-            String logoUrlDB) {
+            String logoUrlDB,
+            String facebookDB,
+            String instagramDB,
+            String twitterDB) {
         this.nameDB = nameDB;
         this.lastnameDB = lastnameDB;
         this.userNameDB = userNameDB;
@@ -120,13 +146,18 @@ public class PersonDB {
         this.emailDB = emailDB;
         this.passwordDB = passwordDB;
         this.phoneDB = phoneDB;
+        this.aboutMeSubDB = aboutMeSubDB;
         this.aboutMeDB = aboutMeDB;
         this.jobDB = jobDB;
+        this.locationDB = locationDB;
         this.imageHeaderDB = imageHeaderDB;
         this.imageDB = imageDB;
         this.logoSrcDB = logoSrcDB;
         this.logoAltDB = logoAltDB;
         this.logoUrlDB = logoUrlDB;
+        this.facebookDB = facebookDB;
+        this.instagramDB = instagramDB;
+        this.twitterDB = twitterDB;
     }
 
     public Integer getIdPersonDB() {
@@ -201,6 +232,14 @@ public class PersonDB {
         this.phoneDB = phoneDB;
     }
 
+    public String getAboutMeSubDB() {
+        return aboutMeSubDB;
+    }
+
+    public void setAboutMeSubDB(String aboutMeSubDB) {
+        this.aboutMeSubDB = aboutMeSubDB;
+    }
+
     public String getAboutMeDB() {
         return aboutMeDB;
     }
@@ -215,6 +254,14 @@ public class PersonDB {
 
     public void setJobDB(String jobDB) {
         this.jobDB = jobDB;
+    }
+
+    public String getLocationDB() {
+        return locationDB;
+    }
+
+    public void setLocationDB(String locationDB) {
+        this.locationDB = locationDB;
     }
 
     public String getImageHeaderDB() {
@@ -255,5 +302,29 @@ public class PersonDB {
 
     public void setLogoUrlDB(String logoUrlDB) {
         this.logoUrlDB = logoUrlDB;
+    }
+
+    public String getFacebookDB() {
+        return facebookDB;
+    }
+
+    public void setFacebookDB(String facebookDB) {
+        this.facebookDB = facebookDB;
+    }
+
+    public String getInstagramDB() {
+        return instagramDB;
+    }
+
+    public void setInstagramDB(String instagramDB) {
+        this.instagramDB = instagramDB;
+    }
+
+    public String getTwitterDB() {
+        return twitterDB;
+    }
+
+    public void setTwitterDB(String twitterDB) {
+        this.twitterDB = twitterDB;
     }
 }
