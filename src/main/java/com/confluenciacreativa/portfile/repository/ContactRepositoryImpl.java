@@ -27,7 +27,7 @@ public class ContactRepositoryImpl implements ContactRepository{
 
     @Override
     public Optional<List<Contact>> getByPerson(Integer idPerson) {
-        List<ContactDB> contactsDB = contactCrudRepository.findByIdPerson(idPerson);
+        List<ContactDB> contactsDB = contactCrudRepository.findByIdPersonDB(idPerson);
         return  Optional.of(mapper.toContacts(contactsDB));
     }
 

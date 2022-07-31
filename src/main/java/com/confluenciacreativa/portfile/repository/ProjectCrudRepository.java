@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface ProjectCrudRepository extends CrudRepository<ProjectDB, Integer> {
     Boolean existsByTitleDB(String titleDB);
     Optional<ProjectDB> findByTitleDB(String titleDB);
-    List<ProjectDB> findByIdPerson(Integer idPerson);
+    List<ProjectDB> findByIdPersonDB(Integer idPersonDB);
 }

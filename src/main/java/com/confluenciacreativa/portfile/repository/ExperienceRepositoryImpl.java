@@ -26,7 +26,7 @@ public class ExperienceRepositoryImpl implements ExperienceRepository{
 
     @Override
     public Optional<List<Experience>> getByPerson(Integer idPerson) {
-        List<ExperienceDB> experiencesDB = experienceCrudRepository.findByIdPerson(idPerson);
+        List<ExperienceDB> experiencesDB = experienceCrudRepository.findByIdPersonDB(idPerson);
         return Optional.of(mapper.toExperiences(experiencesDB));
     }
 

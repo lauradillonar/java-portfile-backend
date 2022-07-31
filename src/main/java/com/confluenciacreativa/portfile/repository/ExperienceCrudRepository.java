@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface ExperienceCrudRepository extends CrudRepository<ExperienceDB, Integer> {
     Boolean existsByTitleDB(String titleDB);
     Optional<ExperienceDB>findByTitleDB(String titleDB);
-    List<ExperienceDB> findByIdPerson (Integer idPerson);
+    List<ExperienceDB> findByIdPersonDB (Integer idPersonDB);
 }

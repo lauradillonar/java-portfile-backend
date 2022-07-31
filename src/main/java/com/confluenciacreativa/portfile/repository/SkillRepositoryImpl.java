@@ -25,7 +25,7 @@ public class SkillRepositoryImpl implements SkillRepository{
 
     @Override
     public Optional<List<Skill>> getByPerson(Integer idPerson) {
-        List<SkillDB> skillsDB = skillCrudRepository.findByIdPerson(idPerson);
+        List<SkillDB> skillsDB = skillCrudRepository.findByIdPersonDB(idPerson);
         return  Optional.of(mapper.toSkills(skillsDB));
     }
 

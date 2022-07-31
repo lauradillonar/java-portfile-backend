@@ -25,7 +25,7 @@ public class EducationRepositoryImpl implements EducationRepository{
 
     @Override
     public Optional<List<Education>> getByPerson(Integer idPerson) {
-        List<EducationDB> educationsDB = educationCrudRepository.findByIdPerson(idPerson);
+        List<EducationDB> educationsDB = educationCrudRepository.findByIdPersonDB(idPerson);
         return Optional.of(mapper.toEducations(educationsDB));
     }
 

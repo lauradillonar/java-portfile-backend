@@ -27,7 +27,7 @@ public class ProjectRepositoryImpl implements ProjectRepository{
 
     @Override
     public Optional<List<Project>> getByPerson(Integer idPerson) {
-        List<ProjectDB> projectsDB = projectCrudRepository.findByIdPerson(idPerson);
+        List<ProjectDB> projectsDB = projectCrudRepository.findByIdPersonDB(idPerson);
         return  Optional.of(mapper.toProjects(projectsDB));
     }
 

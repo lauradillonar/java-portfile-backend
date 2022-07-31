@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface SkillCrudRepository extends CrudRepository<SkillDB, Integer> {
     Boolean existsByItemDB(String itemDB);
     Optional<SkillDB> findByItemDB(String itemDB);
-    List<SkillDB> findByIdPerson(Integer idPerson);
+    List<SkillDB> findByIdPersonDB(Integer idPersonDB);
 }
