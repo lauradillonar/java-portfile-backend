@@ -12,6 +12,9 @@ public class ProjectDB {
     @Column(name = "id_project_pro")
     private Integer idProjectDB;
 
+    @Column(name = "person_id")
+    private Integer idPersonDB;
+
     @NotNull
     @Column(name = "title_pro", unique = true)
     private String titleDB;
@@ -27,6 +30,10 @@ public class ProjectDB {
 
     @Column(name = "viewmore_pro")
     private String viewmoreDB;
+
+    @ManyToOne
+    @JoinColumn(name = "person_id", insertable = false, updatable = false)
+    private PersonDB personDB;
 
     public ProjectDB() {
     }
@@ -93,5 +100,21 @@ public class ProjectDB {
 
     public void setViewmoreDB(String viewmoreDB) {
         this.viewmoreDB = viewmoreDB;
+    }
+
+    public Integer getIdPersonDB() {
+        return idPersonDB;
+    }
+
+    public void setIdPersonDB(Integer idPersonDB) {
+        this.idPersonDB = idPersonDB;
+    }
+
+    public PersonDB getPersonDB() {
+        return personDB;
+    }
+
+    public void setPersonDB(PersonDB personDB) {
+        this.personDB = personDB;
     }
 }

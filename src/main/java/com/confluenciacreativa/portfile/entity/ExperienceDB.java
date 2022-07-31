@@ -12,6 +12,9 @@ public class ExperienceDB {
     @Column(name = "id_experience_exp")
     private Integer idExperienceDB;
 
+    @Column(name = "person_id")
+    private Integer idPersonDB;
+
     @NotNull
     @Column(name = "title_exp", unique = true)
     private String titleDB;
@@ -48,6 +51,10 @@ public class ExperienceDB {
 
     @Column(name = "url3_exp")
     private String url3DB;
+
+    @ManyToOne
+    @JoinColumn(name = "person_id", insertable = false, updatable = false)
+    private PersonDB personDB;
 
     public ExperienceDB() {
     }
@@ -180,5 +187,21 @@ public class ExperienceDB {
 
     public void setUrl3DB(String url3DB) {
         this.url3DB = url3DB;
+    }
+
+    public Integer getIdPersonDB() {
+        return idPersonDB;
+    }
+
+    public void setIdPersonDB(Integer idPersonDB) {
+        this.idPersonDB = idPersonDB;
+    }
+
+    public PersonDB getPersonDB() {
+        return personDB;
+    }
+
+    public void setPersonDB(PersonDB personDB) {
+        this.personDB = personDB;
     }
 }

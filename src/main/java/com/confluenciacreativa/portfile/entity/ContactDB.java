@@ -13,6 +13,9 @@ public class ContactDB {
     @Column(name = "id_contact_con")
     private Integer idContactDB;
 
+    @Column(name = "person_id")
+    private Integer idPersonDB;
+
     @NotNull
     @Column(name = "textName_con")
     private String textNameDB;
@@ -25,6 +28,10 @@ public class ContactDB {
     @NotNull
     @Column(name = "textMessage_con", columnDefinition = "VARCHAR(3000)")
     private String textMessageDB;
+
+    @ManyToOne
+    @JoinColumn(name = "person_id", insertable = false, updatable = false)
+    private PersonDB personDB;
 
     public ContactDB() {
     }
@@ -67,5 +74,21 @@ public class ContactDB {
 
     public void setTextMessageDB(String textMessageDB) {
         this.textMessageDB = textMessageDB;
+    }
+
+    public Integer getIdPersonDB() {
+        return idPersonDB;
+    }
+
+    public void setIdPersonDB(Integer idPersonDB) {
+        this.idPersonDB = idPersonDB;
+    }
+
+    public PersonDB getPersonDB() {
+        return personDB;
+    }
+
+    public void setPersonDB(PersonDB personDB) {
+        this.personDB = personDB;
     }
 }

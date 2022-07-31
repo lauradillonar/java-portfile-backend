@@ -12,6 +12,9 @@ public class EducationDB {
     @Column(name = "id_education_edu")
     private Integer idEducationDB;
 
+    @Column(name = "person_id")
+    private Integer idPersonDB;
+
     @NotNull
     @Column(name = "title_edu", unique = true)
     private String titleDB;
@@ -38,6 +41,10 @@ public class EducationDB {
 
     @Column(name = "viewmore_edu")
     private String viewmoreDB;
+
+    @ManyToOne
+    @JoinColumn(name = "person_id", insertable = false, updatable = false)
+    private PersonDB personDB;
 
     public EducationDB() {
     }
@@ -138,5 +145,21 @@ public class EducationDB {
 
     public void setViewmoreDB(String viewmoreDB) {
         this.viewmoreDB = viewmoreDB;
+    }
+
+    public Integer getIdPersonDB() {
+        return idPersonDB;
+    }
+
+    public void setIdPersonDB(Integer idPersonDB) {
+        this.idPersonDB = idPersonDB;
+    }
+
+    public PersonDB getPersonDB() {
+        return personDB;
+    }
+
+    public void setPersonDB(PersonDB personDB) {
+        this.personDB = personDB;
     }
 }
