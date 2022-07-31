@@ -1,5 +1,6 @@
 package com.confluenciacreativa.portfile.service;
 
+import com.confluenciacreativa.portfile.domain.Experience;
 import com.confluenciacreativa.portfile.domain.Project;
 import com.confluenciacreativa.portfile.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class ProjectService {
 
     public Boolean existsById(Integer idProject){
         return projectRepository.existsById(idProject);
+    }
+
+    public Optional<List<Project>> getByPerson(Integer idPerson){
+        return projectRepository.getByPerson(idPerson);
     }
 
     public Boolean existsByTitle(String title){

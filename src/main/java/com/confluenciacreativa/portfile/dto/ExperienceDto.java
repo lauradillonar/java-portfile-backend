@@ -1,13 +1,20 @@
-package com.confluenciacreativa.portfile.domain;
+package com.confluenciacreativa.portfile.dto;
 
-public class Experience {
+import javax.validation.constraints.NotBlank;
 
-    private Integer idExperience;
+public class ExperienceDto {
+
+    @NotBlank
     private Integer idPerson;
+    @NotBlank
     private String title;
+    @NotBlank
     private String subtitle;
+    @NotBlank
     private String when;
+    @NotBlank
     private String where;
+
     private String text;
     private String link1;
     private String url1;
@@ -15,23 +22,22 @@ public class Experience {
     private String url2;
     private String link3;
     private String url3;
-    private Person person;
 
-    public Experience() {
+    public ExperienceDto() {
     }
 
-    public Experience(Integer idPerson,
-                      String title,
-                      String subtitle,
-                      String when,
-                      String where,
-                      String text,
-                      String link1,
-                      String url1,
-                      String link2,
-                      String url2,
-                      String link3,
-                      String url3) {
+    public ExperienceDto(Integer idPerson,
+                         String title,
+                         String subtitle,
+                         String when,
+                         String where,
+                         String text,
+                         String link1,
+                         String url1,
+                         String link2,
+                         String url2,
+                         String link3,
+                         String url3) {
         this.idPerson = idPerson;
         this.title = title;
         this.subtitle = subtitle;
@@ -44,14 +50,6 @@ public class Experience {
         this.url2 = url2;
         this.link3 = link3;
         this.url3 = url3;
-    }
-
-    public Integer getIdExperience() {
-        return idExperience;
-    }
-
-    public void setIdExperience(Integer idExperience) {
-        this.idExperience = idExperience;
     }
 
     public Integer getIdPerson() {
@@ -148,13 +146,5 @@ public class Experience {
 
     public void setUrl3(String url3) {
         this.url3 = url3;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
     }
 }

@@ -1,30 +1,23 @@
-package com.confluenciacreativa.portfile.domain;
+package com.confluenciacreativa.portfile.dto;
 
-public class Skill {
+import javax.validation.constraints.NotBlank;
 
-    private Integer idSkill;
+public class SkillDto {
+
+    @NotBlank
     private Integer idPerson;
+    @NotBlank
     private String item;
+    @NotBlank
     private Integer progress;
-    private Person person;
 
-    public Skill() {
+    public SkillDto() {
     }
 
-    public Skill(Integer idPerson,
-                 String item,
-                 Integer progress) {
+    public SkillDto(Integer idPerson, String item, Integer progress) {
         this.idPerson = idPerson;
         this.item = item;
         this.progress = progress;
-    }
-
-    public Integer getIdSkill() {
-        return idSkill;
-    }
-
-    public void setIdSkill(Integer idSkill) {
-        this.idSkill = idSkill;
     }
 
     public Integer getIdPerson() {
@@ -49,13 +42,5 @@ public class Skill {
 
     public void setProgress(Integer progress) {
         this.progress = progress;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
     }
 }

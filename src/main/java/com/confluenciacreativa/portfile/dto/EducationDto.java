@@ -1,31 +1,36 @@
-package com.confluenciacreativa.portfile.domain;
+package com.confluenciacreativa.portfile.dto;
 
-public class Education {
+import javax.validation.constraints.NotBlank;
 
-    private Integer idEducation;
+public class EducationDto {
+
+    @NotBlank
     private Integer idPerson;
+    @NotBlank
     private String title;
+    @NotBlank
     private String when;
+    @NotBlank
     private String subtitle;
+
     private String text1;
     private String link;
     private String url;
     private String text2;
     private String viewmore;
-    private Person person;
 
-    public Education() {
+    public EducationDto() {
     }
 
-    public Education(Integer idPerson,
-                     String title,
-                     String when,
-                     String subtitle,
-                     String text1,
-                     String link,
-                     String url,
-                     String text2,
-                     String viewmore) {
+    public EducationDto(Integer idPerson,
+                        String title,
+                        String when,
+                        String subtitle,
+                        String text1,
+                        String link,
+                        String url,
+                        String text2,
+                        String viewmore) {
         this.idPerson = idPerson;
         this.title = title;
         this.when = when;
@@ -35,14 +40,6 @@ public class Education {
         this.url = url;
         this.text2 = text2;
         this.viewmore = viewmore;
-    }
-
-    public Integer getIdEducation() {
-        return idEducation;
-    }
-
-    public void setIdEducation(Integer idEducation) {
-        this.idEducation = idEducation;
     }
 
     public Integer getIdPerson() {
@@ -115,13 +112,5 @@ public class Education {
 
     public void setViewmore(String viewmore) {
         this.viewmore = viewmore;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
     }
 }

@@ -1,33 +1,29 @@
-package com.confluenciacreativa.portfile.domain;
+package com.confluenciacreativa.portfile.dto;
 
-public class Contact {
+import javax.validation.constraints.NotBlank;
 
-    private Integer idContact;
+public class ContactDto {
+
+    @NotBlank
     private Integer idPerson;
+    @NotBlank
     private String textName;
+    @NotBlank
     private String textEmail;
+    @NotBlank
     private String textMessage;
-    private Person person;
 
-    public Contact() {
+    public ContactDto() {
     }
 
-    public Contact(Integer idPerson,
-                   String textName,
-                   String textEmail,
-                   String textMessage) {
+    public ContactDto(Integer idPerson,
+                      String textName,
+                      String textEmail,
+                      String textMessage) {
         this.idPerson = idPerson;
         this.textName = textName;
         this.textEmail = textEmail;
         this.textMessage = textMessage;
-    }
-
-    public Integer getIdContact() {
-        return idContact;
-    }
-
-    public void setIdContact(Integer idContact) {
-        this.idContact = idContact;
     }
 
     public Integer getIdPerson() {
@@ -60,13 +56,5 @@ public class Contact {
 
     public void setTextMessage(String textMessage) {
         this.textMessage = textMessage;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
     }
 }

@@ -1,39 +1,34 @@
-package com.confluenciacreativa.portfile.domain;
+package com.confluenciacreativa.portfile.dto;
 
-public class Project {
+import javax.validation.constraints.NotBlank;
 
-    private Integer idProject;
+public class ProjectDto {
+
+    @NotBlank
     private Integer idPerson;
+    @NotBlank
     private String title;
+
     private String fontawesome;
     private String letter;
     private String text;
     private String viewmore;
-    private Person person;
 
-    public Project() {
+    public ProjectDto() {
     }
 
-    public Project(Integer idPerson,
-                   String title,
-                   String fontawesome,
-                   String letter,
-                   String text,
-                   String viewmore) {
+    public ProjectDto(Integer idPerson,
+                      String title,
+                      String fontawesome,
+                      String letter,
+                      String text,
+                      String viewmore) {
         this.idPerson = idPerson;
         this.title = title;
         this.fontawesome = fontawesome;
         this.letter = letter;
         this.text = text;
         this.viewmore = viewmore;
-    }
-
-    public Integer getIdProject() {
-        return idProject;
-    }
-
-    public void setIdProject(Integer idProject) {
-        this.idProject = idProject;
     }
 
     public Integer getIdPerson() {
@@ -82,13 +77,5 @@ public class Project {
 
     public void setViewmore(String viewmore) {
         this.viewmore = viewmore;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
     }
 }
