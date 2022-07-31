@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "persons")
@@ -86,6 +87,21 @@ public class PersonDB {
 
     @Column (name = "twitter_link")
     private String twitterDB;
+
+    @OneToMany(mappedBy = "personDB")
+    private List<ExperienceDB>experiencesDB;
+
+    @OneToMany(mappedBy = "personDB")
+    private List<EducationDB>educationsDB;
+
+    @OneToMany(mappedBy = "personDB")
+    private List<SkillDB>skillsDB;
+
+    @OneToMany(mappedBy = "personDB")
+    private List<ProjectDB>projectsDB;
+
+    @OneToMany(mappedBy = "personDB")
+    private List<ContactDB>contactsDB;
 
     public PersonDB() {
     }
@@ -326,5 +342,45 @@ public class PersonDB {
 
     public void setTwitterDB(String twitterDB) {
         this.twitterDB = twitterDB;
+    }
+
+    public List<ExperienceDB> getExperiencesDB() {
+        return experiencesDB;
+    }
+
+    public void setExperiencesDB(List<ExperienceDB> experiencesDB) {
+        this.experiencesDB = experiencesDB;
+    }
+
+    public List<EducationDB> getEducationsDB() {
+        return educationsDB;
+    }
+
+    public void setEducationsDB(List<EducationDB> educationsDB) {
+        this.educationsDB = educationsDB;
+    }
+
+    public List<SkillDB> getSkillsDB() {
+        return skillsDB;
+    }
+
+    public void setSkillsDB(List<SkillDB> skillsDB) {
+        this.skillsDB = skillsDB;
+    }
+
+    public List<ProjectDB> getProjectsDB() {
+        return projectsDB;
+    }
+
+    public void setProjectsDB(List<ProjectDB> projectsDB) {
+        this.projectsDB = projectsDB;
+    }
+
+    public List<ContactDB> getContactsDB() {
+        return contactsDB;
+    }
+
+    public void setContactsDB(List<ContactDB> contactsDB) {
+        this.contactsDB = contactsDB;
     }
 }
