@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface ExperienceRepository {
 
     List<Experience> getAll();
+    Optional<List<Experience>> getByPerson(Integer idPerson);
     Boolean existsById(Integer idExperience);
     Boolean existsByTitle(String title);
     Optional<Experience> getExperience(Integer idExperience);

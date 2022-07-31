@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface SkillRepository {
 
     List<Skill> getAll();
+    Optional<List<Skill>> getByPerson(Integer idPerson);
     Boolean exitsById(Integer idSkill);
     Boolean existsByItem(String item);
     Optional<Skill> getSkill(Integer idSkill);

@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface ProjectRepository {
 
     List<Project> getAll();
+    Optional<List<Project>> getByPerson(Integer idPerson);
     Boolean existsById(Integer idProject);
     Boolean existsByTitle(String title);
     Optional<Project> getProject(Integer idProject);

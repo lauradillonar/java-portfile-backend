@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface EducationRepository {
 
     List<Education> getAll();
+    Optional<List<Education>> getByPerson(Integer idPerson);
     Boolean existsById(Integer idEducation);
     Boolean existsByTitle(String title);
     Optional<Education> getEducation(Integer idEducation);

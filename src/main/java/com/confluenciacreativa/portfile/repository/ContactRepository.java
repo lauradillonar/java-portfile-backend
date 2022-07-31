@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface ContactRepository {
 
     List<Contact> getAll();
+    Optional<List<Contact>> getByPerson(Integer idPerson);
     Boolean existsById(Integer idContact);
     Optional<Contact> getContact(Integer idContact);
     void save(Contact contact);
