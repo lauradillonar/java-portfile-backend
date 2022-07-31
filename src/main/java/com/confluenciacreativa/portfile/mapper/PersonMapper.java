@@ -38,5 +38,12 @@ public interface PersonMapper {
     List<Person> toPersons(List<PersonDB> personsDB);
 
     @InheritInverseConfiguration
+    @Mappings({
+            @Mapping(target = "experiencesDB", ignore = true),
+            @Mapping(target = "educationsDB", ignore = true),
+            @Mapping(target = "skillsDB", ignore = true),
+            @Mapping(target = "projectsDB", ignore = true),
+            @Mapping(target = "contactsDB", ignore = true)
+    })
     PersonDB toPersonDB(Person person);
 }
