@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/projects")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://lvd-portfile.web.app/portfile/")
 public class ProjectController {
 
     @Autowired

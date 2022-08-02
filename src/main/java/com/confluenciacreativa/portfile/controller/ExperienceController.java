@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/experiences")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://lvd-portfile.web.app/portfile/")
 public class ExperienceController {
 
     @Autowired

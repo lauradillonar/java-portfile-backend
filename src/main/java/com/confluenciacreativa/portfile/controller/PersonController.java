@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/persons")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://lvd-portfile.web.app/portfile/")
 public class PersonController {
 
     @Autowired
