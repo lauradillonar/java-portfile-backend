@@ -93,10 +93,10 @@
 						<configuration>
 							<artifactItems>
 								<artifactItem>
-									<groupId>com.github.lauradillonar</groupId>
-									<artifactId>portfile</artifactId>
-									<version>0.0.1-SNAPSHOT</version>
-									<destFileName>portfile-0.0.1-SNAPSHOT.jar</destFileName>
+									<groupId>com.github.jsimone</groupId>
+									<artifactId>webapp-runner</artifactId>
+									<version>8.5.31.0</version>
+									<destFileName>webapp-runner.jar</destFileName>
 								</artifactItem>
 							</artifactItems>
 						</configuration>
