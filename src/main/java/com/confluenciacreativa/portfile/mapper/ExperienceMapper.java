@@ -15,7 +15,7 @@ public interface ExperienceMapper {
             @Mapping(source="idExperienceDB", target = "idExperience"),
             @Mapping(source="idPersonDB", target = "idPerson"),
             @Mapping(source="titleDB", target = "title"),
-            @Mapping(source="titleDB", target = "subtitle"),
+            @Mapping(source="subtitleDB", target = "subtitle"),
             @Mapping(source="whenDB", target = "when"),
             @Mapping(source="whereDB", target = "where"),
             @Mapping(source="whereDB", target = "text"),

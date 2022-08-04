@@ -52,7 +52,9 @@ public class ExperienceRepositoryImpl implements ExperienceRepository{
 
     @Override
     public void save(Experience experience) {
+
         ExperienceDB experienceDB = mapper.toExperienceDB(experience);
+        experienceCrudRepository.save(experienceDB);
     }
 
     @Override
