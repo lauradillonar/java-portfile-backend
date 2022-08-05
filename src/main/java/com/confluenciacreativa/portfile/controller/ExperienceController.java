@@ -87,6 +87,9 @@ public class ExperienceController {
             return new ResponseEntity(new Message("Un periodo es requerido"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(experienceDto.getWhere()))
             return new ResponseEntity(new Message("Un lugar es requerido"), HttpStatus.BAD_REQUEST);
+        if(experienceService.existsByTitle(experienceDto.getTitle())
+                && idExperience != experienceService.findByTitle(experienceDto.getTitle()).get().getIdExperience())
+            return new ResponseEntity(new Message("Esa experiencia ya existe"), HttpStatus.BAD_REQUEST);
         Experience experience = experienceService.getExperience(idExperience).get();
         experience.setIdPerson(experienceDto.getIdPerson());
         experience.setTitle(experienceDto.getTitle());
@@ -102,5 +105,13 @@ public class ExperienceController {
 
         experienceService.save(experience);
         return new ResponseEntity(new Message("Datos actualizados"), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Integer idExperience){
+        if(!experienceService.existsById(idExperience))
+            return  new ResponseEntity(new Message("No existe"), HttpStatus.OK);
+        experienceService.delete(idExperience);
+        return  new ResponseEntity(new Message("Experiencia borrada"), HttpStatus.OK);
     }
 }
