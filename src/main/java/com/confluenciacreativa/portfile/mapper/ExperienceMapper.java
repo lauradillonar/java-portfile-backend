@@ -18,7 +18,7 @@ public interface ExperienceMapper {
             @Mapping(source="subtitleDB", target = "subtitle"),
             @Mapping(source="whenDB", target = "when"),
             @Mapping(source="whereDB", target = "where"),
-            @Mapping(source="text", target = "text"),
+            @Mapping(source="textBB", target = "text"),
             @Mapping(source="link1DB", target = "link1"),
             @Mapping(source="url1DB", target = "url1"),
             @Mapping(source="link2DB", target = "link2"),
