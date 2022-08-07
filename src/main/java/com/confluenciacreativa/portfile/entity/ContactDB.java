@@ -13,6 +13,7 @@ public class ContactDB {
     @Column(name = "id_contact_con")
     private Integer idContactDB;
 
+    @NotNull
     @Column(name = "person_id")
     private Integer idPersonDB;
 

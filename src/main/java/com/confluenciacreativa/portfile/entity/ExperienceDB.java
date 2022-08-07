@@ -12,6 +12,7 @@ public class ExperienceDB {
     @Column(name = "id_experience_exp")
     private Integer idExperienceDB;
 
+    @NotNull
     @Column(name = "person_id")
     private Integer idPersonDB;
 

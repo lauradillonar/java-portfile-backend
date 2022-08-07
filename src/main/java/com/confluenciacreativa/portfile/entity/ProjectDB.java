@@ -12,6 +12,7 @@ public class ProjectDB {
     @Column(name = "id_project_pro")
     private Integer idProjectDB;
 
+    @NotNull
     @Column(name = "person_id")
     private Integer idPersonDB;
 

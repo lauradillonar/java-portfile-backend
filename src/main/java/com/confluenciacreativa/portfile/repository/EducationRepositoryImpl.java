@@ -36,12 +36,14 @@ public class EducationRepositoryImpl implements EducationRepository{
 
     @Override
     public Boolean existsByTitle(String title) {
+
         return educationCrudRepository.existsByTitleDB(title);
     }
 
     @Override
     public Optional<Education> getEducation(Integer idEducation) {
-        return educationCrudRepository.findById(idEducation).map(educationDB -> mapper.toEducation(educationDB));
+        return educationCrudRepository.findById(idEducation).map(
+                educationDB -> mapper.toEducation(educationDB));
     }
 
     @Override
@@ -58,5 +60,10 @@ public class EducationRepositoryImpl implements EducationRepository{
     @Override
     public void delete(Integer idEducation) {
         educationCrudRepository.deleteById(idEducation);
+    }
+
+    @Override
+    public Boolean existsByTitleAndIdPerson(String title, Integer idPerson){
+        return educationCrudRepository.existsByTitleDBAndIdPersonDB(title, idPerson);
     }
 }

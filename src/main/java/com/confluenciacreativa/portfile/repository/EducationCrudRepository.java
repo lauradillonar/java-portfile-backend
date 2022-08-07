@@ -10,4 +10,5 @@ public interface EducationCrudRepository extends CrudRepository<EducationDB, Int
     Boolean existsByTitleDB(String titleDB);
     Optional<EducationDB> findByTitleDB(String titleDB);
     List<EducationDB> findByIdPersonDB(Integer idPersonDB);
+    Boolean existsByTitleDBAndIdPersonDB (String titleDB, Integer idPersonDB);
 }

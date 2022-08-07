@@ -13,6 +13,7 @@ public class SkillDB {
     @Column(name = "id_skill_ski")
     private Integer idSkillDB;
 
+    @NotNull
     @Column(name = "person_id")
     private Integer idPersonDB;
 

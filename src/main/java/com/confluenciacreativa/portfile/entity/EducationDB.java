@@ -12,6 +12,7 @@ public class EducationDB {
     @Column(name = "id_education_edu")
     private Integer idEducationDB;
 
+    @NotNull
     @Column(name = "person_id")
     private Integer idPersonDB;
 

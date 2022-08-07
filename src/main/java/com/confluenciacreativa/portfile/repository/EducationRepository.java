@@ -15,4 +15,5 @@ public interface EducationRepository {
     Optional<Education> findByTitle(String title);
     void save(Education education);
     void delete(Integer idEducation);
+    Boolean existsByTitleAndIdPerson(String title, Integer idPerson);
 }

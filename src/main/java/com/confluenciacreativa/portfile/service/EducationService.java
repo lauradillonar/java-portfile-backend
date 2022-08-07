@@ -21,10 +21,12 @@ public class EducationService {
     }
 
     public Optional<List<Education>> getByPerson(Integer idPerson){
+
         return educationRepository.getByPerson(idPerson);
     }
 
     public Boolean existsById(Integer idEducation){
+
         return educationRepository.existsById(idEducation);
     }
 
@@ -50,5 +52,9 @@ public class EducationService {
                     educationRepository.delete(idEducation);
                     return true;
                 }).orElse(false);
+    }
+
+    public Boolean existsByTitleAndIdPerson(String title, Integer idPerson){
+        return educationRepository.existsByTitleAndIdPerson(title, idPerson);
     }
 }
