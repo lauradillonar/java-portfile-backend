@@ -10,4 +10,5 @@ public interface SkillCrudRepository extends CrudRepository<SkillDB, Integer> {
     Boolean existsByItemDB(String itemDB);
     Optional<SkillDB> findByItemDB(String itemDB);
     List<SkillDB> findByIdPersonDB(Integer idPersonDB);
+    Boolean existsByItemDBAndIdPersonDB(String titleDB, Integer idPersonDB);
 }

@@ -21,10 +21,12 @@ public class SkillService {
     }
 
     public Optional<List<Skill>> getByPerson(Integer idPerson){
+
         return skillRepository.getByPerson(idPerson);
     }
 
     public Boolean existsById(Integer idSkill){
+
         return skillRepository.exitsById(idSkill);
     }
 
@@ -50,5 +52,9 @@ public class SkillService {
                     skillRepository.delete(idSkill);
                     return true;
                 }).orElse(false);
+    }
+
+    public Boolean existsByItemAndIdPerson(String item, Integer idPerson){
+        return skillRepository.existsByItemAndIdPerson(item, idPerson);
     }
 }

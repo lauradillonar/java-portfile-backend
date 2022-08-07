@@ -59,4 +59,9 @@ public class SkillRepositoryImpl implements SkillRepository{
     public void delete(Integer idSkill) {
         skillCrudRepository.deleteById(idSkill);
     }
+
+    @Override
+    public Boolean existsByItemAndIdPerson(String item, Integer idPerson) {
+        return skillCrudRepository.existsByItemDBAndIdPersonDB(item, idPerson);
+    }
 }

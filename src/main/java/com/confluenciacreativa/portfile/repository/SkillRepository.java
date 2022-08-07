@@ -15,4 +15,5 @@ public interface SkillRepository {
     Optional<Skill> findByItem(String item);
     void save(Skill skill);
     void delete(Integer idSkill);
+    Boolean existsByItemAndIdPerson(String title, Integer idPerson);
 }
