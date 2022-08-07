@@ -16,7 +16,7 @@ public class ProjectDB {
     private Integer idPersonDB;
 
     @NotNull
-    @Column(name = "title_pro", unique = true)
+    @Column(name = "title_pro")
     private String titleDB;
 
     @Column(name = "fontawesome_pro")

@@ -1,11 +1,12 @@
 package com.confluenciacreativa.portfile.controller;
 
-import com.confluenciacreativa.portfile.domain.Contact;
 import com.confluenciacreativa.portfile.domain.Experience;
 import com.confluenciacreativa.portfile.dto.ExperienceDto;
 import com.confluenciacreativa.portfile.dto.Message;
 import com.confluenciacreativa.portfile.service.ExperienceService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,8 @@ import java.util.List;
 @RequestMapping("/experiences")
 @CrossOrigin(origins = "http://localhost:4200")
 public class ExperienceController {
+
+    private final Log LOGGER = LogFactory.getLog(ExperienceController.class);
 
     @Autowired
     private ExperienceService experienceService;
@@ -41,9 +44,10 @@ public class ExperienceController {
                 .orElse(new ResponseEntity(new Message("No existe"), HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody ExperienceDto experienceDto){
-        if(StringUtils.isBlank(experienceDto.getIdPerson().toString()))
+    @PostMapping("/save/{idPerson}")
+    public ResponseEntity<?> save(@PathVariable("idPerson") Integer idPerson, @RequestBody ExperienceDto experienceDto){
+
+         if(StringUtils.isBlank(experienceDto.getIdPerson().toString()))
             return new ResponseEntity(new Message("El id de persona es requerido"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(experienceDto.getTitle()))
             return new ResponseEntity(new Message("Un título de la experiencia es requerido"), HttpStatus.BAD_REQUEST);
@@ -53,7 +57,7 @@ public class ExperienceController {
             return new ResponseEntity(new Message("El período de la experiencia es requerido"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(experienceDto.getWhere()))
             return new ResponseEntity(new Message("El lugar de la experiencia es requerido"), HttpStatus.BAD_REQUEST);
-        if(experienceService.existsByTitle(experienceDto.getTitle()))
+        if(experienceService.existsByTitleAndIdPerson(experienceDto.getTitle(), idPerson))
             return new ResponseEntity(new Message("Esa experiencia ya existe"), HttpStatus.BAD_REQUEST);
         Experience experience = new Experience(
                 experienceDto.getIdPerson(),

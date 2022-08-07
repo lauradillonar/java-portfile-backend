@@ -16,7 +16,7 @@ public class EducationDB {
     private Integer idPersonDB;
 
     @NotNull
-    @Column(name = "title_edu", unique = true)
+    @Column(name = "title_edu")
     private String titleDB;
 
     @NotNull

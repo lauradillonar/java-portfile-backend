@@ -51,4 +51,8 @@ public class ExperienceService {
                     return true;
                 }).orElse(false);
     }
+
+    public Boolean existsByTitleAndIdPerson(String title, Integer idPerson){
+        return experienceRepository.existsByTitleAndIdPerson(title, idPerson);
+    }
 }

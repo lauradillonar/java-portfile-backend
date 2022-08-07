@@ -17,7 +17,7 @@ public class SkillDB {
     private Integer idPersonDB;
 
     @NotNull
-    @Column(name = "item_ski", unique = true)
+    @Column(name = "item_ski")
     private String itemDB;
 
     @NotNull

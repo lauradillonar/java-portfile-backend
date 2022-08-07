@@ -1,6 +1,7 @@
 package com.confluenciacreativa.portfile.repository;
 
 import com.confluenciacreativa.portfile.domain.Experience;
+import com.confluenciacreativa.portfile.entity.ExperienceDB;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,4 +16,5 @@ public interface ExperienceRepository {
     Optional<Experience> findByTitle(String title);
     void save(Experience experience);
     void delete(Integer idExperience);
+    Boolean existsByTitleAndIdPerson(String title, Integer idPerson);
 }

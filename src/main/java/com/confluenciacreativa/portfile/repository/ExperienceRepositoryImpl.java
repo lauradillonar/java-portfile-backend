@@ -61,4 +61,10 @@ public class ExperienceRepositoryImpl implements ExperienceRepository{
     public void delete(Integer idExperience) {
         experienceCrudRepository.deleteById(idExperience);
     }
+
+
+    @Override
+    public Boolean existsByTitleAndIdPerson(String title, Integer idPerson) {
+        return experienceCrudRepository.existsByTitleDBAndIdPersonDB(title, idPerson);
+    }
 }

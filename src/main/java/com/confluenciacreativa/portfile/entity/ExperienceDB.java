@@ -16,7 +16,7 @@ public class ExperienceDB {
     private Integer idPersonDB;
 
     @NotNull
-    @Column(name = "title_exp", unique = true)
+    @Column(name = "title_exp")
     private String titleDB;
 
     @NotNull
