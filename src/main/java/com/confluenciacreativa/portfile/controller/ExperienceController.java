@@ -46,7 +46,7 @@ public class ExperienceController {
 
     @PostMapping("/save/{idPerson}")
     public ResponseEntity<?> save(@PathVariable("idPerson") Integer idPerson, @RequestBody ExperienceDto experienceDto){
-
+    try {
          if(StringUtils.isBlank(experienceDto.getIdPerson().toString()))
             return new ResponseEntity(new Message("El id de persona es requerido"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(experienceDto.getTitle()))
@@ -59,6 +59,9 @@ public class ExperienceController {
             return new ResponseEntity(new Message("El lugar de la experiencia es requerido"), HttpStatus.BAD_REQUEST);
         if(experienceService.existsByTitleAndIdPerson(experienceDto.getTitle(), idPerson))
             return new ResponseEntity(new Message("Esa experiencia ya existe"), HttpStatus.BAD_REQUEST);
+    }catch(Exception e){
+        return new ResponseEntity(new Message("Datos inválidos"), HttpStatus.BAD_REQUEST);
+    }
         Experience experience = new Experience(
                 experienceDto.getIdPerson(),
                 experienceDto.getTitle(),
@@ -77,37 +80,50 @@ public class ExperienceController {
         return new ResponseEntity(new Message("Experiencia agregada"), HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Integer idExperience, @RequestBody ExperienceDto experienceDto){
+    @PutMapping("/update/{idPerson}/{idExperience}")
+    public ResponseEntity<?> update(
+            @PathVariable("idPerson") Integer idPerson ,
+            @PathVariable("idExperience") Integer idExperience,
+            @RequestBody Experience experience){
+        // LOGGER.info("Estoy en update");
+        // LOGGER.info("El id de la experiencia es "+ experience.getIdExperience());
+    try{
         if(!experienceService.existsById(idExperience))
             return new ResponseEntity(new Message("No existe"), HttpStatus.NOT_FOUND);
-        if(StringUtils.isBlank(experienceDto.getIdPerson().toString()))
+        if(idExperience != experience.getIdExperience())
+            return new ResponseEntity(new Message("Datos inválidos"), HttpStatus.BAD_REQUEST);
+        if(StringUtils.isBlank(experience.getIdPerson().toString()))
             return new ResponseEntity(new Message("Un id de persona es requerido"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(experienceDto.getTitle()))
+        if(StringUtils.isBlank(experience.getTitle()))
             return new ResponseEntity(new Message("El título de la experiencia es requerido"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(experienceDto.getSubtitle()))
+        if(StringUtils.isBlank(experience.getSubtitle()))
             return new ResponseEntity(new Message("Una descripción de la experiencia es requerida"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(experienceDto.getWhen()))
+        if(StringUtils.isBlank(experience.getWhen()))
             return new ResponseEntity(new Message("Un periodo es requerido"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(experienceDto.getWhere()))
+        if(StringUtils.isBlank(experience.getWhere()))
             return new ResponseEntity(new Message("Un lugar es requerido"), HttpStatus.BAD_REQUEST);
-        if(experienceService.existsByTitle(experienceDto.getTitle())
-                && idExperience != experienceService.findByTitle(experienceDto.getTitle()).get().getIdExperience())
-            return new ResponseEntity(new Message("Esa experiencia ya existe"), HttpStatus.BAD_REQUEST);
-        Experience experience = experienceService.getExperience(idExperience).get();
-        experience.setIdPerson(experienceDto.getIdPerson());
-        experience.setTitle(experienceDto.getTitle());
-        experience.setSubtitle(experienceDto.getSubtitle());
-        experience.setWhen(experienceDto.getWhen());
-        experience.setWhere(experienceDto.getWhere());
-        experience.setText(experienceDto.getText());
-        experience.setLink1(experienceDto.getLink1());
-        experience.setUrl1(experienceDto.getUrl1());
-        experience.setLink2(experienceDto.getLink2());
-        experience.setUrl2(experienceDto.getUrl2());
-        experience.setUrl3(experienceDto.getUrl3());
+        if (experienceService.existsByTitleAndIdPerson(experience.getTitle(), idPerson)
+                && idExperience != experienceService.findByTitle(experience.getTitle()).get().getIdExperience())
+                return new ResponseEntity(new Message("Esa experiencia ya existe"), HttpStatus.BAD_REQUEST);
+        if(idPerson != experienceService.getExperience(experience.getIdExperience()).get().getIdPerson())
+            return new ResponseEntity(new Message("No autorizado"), HttpStatus.BAD_REQUEST);
+    }catch(Exception e){
+        return new ResponseEntity(new Message("Datos inválidos"), HttpStatus.BAD_REQUEST);
+    }
+        Experience storedExperience = experienceService.getExperience(idExperience).get();
+        storedExperience.setIdPerson(experience.getIdPerson());
+        storedExperience.setTitle(experience.getTitle());
+        storedExperience.setSubtitle(experience.getSubtitle());
+        storedExperience.setWhen(experience.getWhen());
+        storedExperience.setWhere(experience.getWhere());
+        storedExperience.setText(experience.getText());
+        storedExperience.setLink1(experience.getLink1());
+        storedExperience.setUrl1(experience.getUrl1());
+        storedExperience.setLink2(experience.getLink2());
+        storedExperience.setUrl2(experience.getUrl2());
+        storedExperience.setUrl3(experience.getUrl3());
 
-        experienceService.save(experience);
+        experienceService.save(storedExperience);
         return new ResponseEntity(new Message("Datos actualizados"), HttpStatus.OK);
     }
 
