@@ -5,6 +5,8 @@ import com.confluenciacreativa.portfile.dto.ContactDto;
 import com.confluenciacreativa.portfile.dto.Message;
 import com.confluenciacreativa.portfile.service.ContactService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,8 @@ import java.util.List;
 @RequestMapping("/contacts")
 @CrossOrigin(origins = "http://localhost:4200")
 public class ContactController {
+
+    private final Log LOGGER = LogFactory.getLog(ContactController.class);
 
     @Autowired
     private ContactService contactService;
@@ -42,14 +46,18 @@ public class ContactController {
 
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody ContactDto contactDto){
+    try{
         if(StringUtils.isBlank(contactDto.getIdPerson().toString()))
             return new ResponseEntity(new Message("El id de persona es requerido"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(contactDto.getTextName()))
             return new ResponseEntity(new Message("Un nombre es requerido"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(contactDto.getTextEmail()))
             return new ResponseEntity(new Message("Un email es requerido"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(contactDto.getTextEmail()))
+        if(StringUtils.isBlank(contactDto.getTextMessage()))
             return new ResponseEntity(new Message("Un mensaje es requerido"), HttpStatus.BAD_REQUEST);
+    }catch(Exception e){
+        return new ResponseEntity(new Message("Datos inválidos"), HttpStatus.BAD_REQUEST);
+    }
         Contact contact = new Contact(
                 contactDto.getIdPerson(),
                 contactDto.getTextName(),
