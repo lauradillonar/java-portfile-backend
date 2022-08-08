@@ -52,4 +52,8 @@ public class ProjectService {
                     return  true;
                 }).orElse(false);
     }
+
+    public Boolean existsByTitleAndIdPerson(String title, Integer idPerson){
+        return projectRepository.existsByTitleAndIdPerson(title, idPerson);
+    }
 }

@@ -15,4 +15,5 @@ public interface ProjectRepository {
     Optional<Project> findByTitle(String title);
     void save(Project project);
     void delete(Integer idProject);
+    Boolean existsByTitleAndIdPerson(String title, Integer idPerson);
 }

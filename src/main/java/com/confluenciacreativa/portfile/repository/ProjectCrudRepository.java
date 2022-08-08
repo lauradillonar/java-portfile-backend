@@ -10,4 +10,6 @@ public interface ProjectCrudRepository extends CrudRepository<ProjectDB, Integer
     Boolean existsByTitleDB(String titleDB);
     Optional<ProjectDB> findByTitleDB(String titleDB);
     List<ProjectDB> findByIdPersonDB(Integer idPersonDB);
+
+    Boolean existsByTitleDBAndIdPersonDB (String titleDB, Integer idPersonDB);
 }

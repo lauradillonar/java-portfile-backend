@@ -61,4 +61,9 @@ public class ProjectRepositoryImpl implements ProjectRepository{
     public void delete(Integer idProject) {
         projectCrudRepository.deleteById(idProject);
     }
+
+    @Override
+    public Boolean existsByTitleAndIdPerson(String title, Integer idPerson) {
+        return projectCrudRepository.existsByTitleDBAndIdPersonDB(title, idPerson);
+    }
 }
