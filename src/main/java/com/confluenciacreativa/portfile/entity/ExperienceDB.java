@@ -32,7 +32,7 @@ public class ExperienceDB {
     @Column(name = "where_exp")
     private String whereDB;
 
-    @Column(name = "text_exp")
+    @Column(name = "text_exp", columnDefinition = "VARCHAR(1024)")
     private String textDB;
 
     @Column(name = "link1_exp")
