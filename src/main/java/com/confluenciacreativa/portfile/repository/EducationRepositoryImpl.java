@@ -15,6 +15,7 @@ public class EducationRepositoryImpl implements EducationRepository{
     @Autowired
     private EducationCrudRepository educationCrudRepository;
 
+    @Autowired
     private EducationMapper mapper;
 
     @Override

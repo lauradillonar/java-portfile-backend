@@ -28,7 +28,7 @@ public class EducationDB {
     @Column(name = "subtitle_edu")
     private String subtitleDB;
 
-    @Column(name = "text1_edu")
+    @Column(name = "text1_edu", columnDefinition = "VARCHAR(512)")
     private String text1DB;
 
     @Column(name = "link_edu")
@@ -37,7 +37,7 @@ public class EducationDB {
     @Column(name = "url_edu")
     private String urlDB;
 
-    @Column(name = "text2_edu")
+    @Column(name = "text2_edu", columnDefinition = "VARCHAR(512)")
     private String text2DB;
 
     @Column(name = "viewmore_edu")
