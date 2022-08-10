@@ -15,6 +15,7 @@ public class SkillRepositoryImpl implements SkillRepository{
     @Autowired
     private SkillCrudRepository skillCrudRepository;
 
+    @Autowired
     private SkillMapper mapper;
 
     @Override

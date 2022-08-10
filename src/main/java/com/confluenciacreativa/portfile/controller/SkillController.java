@@ -100,4 +100,12 @@ public class SkillController {
         skillService.save(storedSkill);
         return new ResponseEntity(new Message("Datos actualizados"), HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Integer idSkill){
+        if(!skillService.existsById(idSkill))
+            return new ResponseEntity(new Message("No exite"), HttpStatus.OK);
+        skillService.delete(idSkill);
+        return new ResponseEntity(new Message("Tecnología borrada"), HttpStatus.OK);
+    }
 }
