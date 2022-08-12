@@ -44,7 +44,7 @@ public class ProjectController {
                 .orElse(new ResponseEntity(new Message("No existe"), HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/save")
+    @PostMapping("/save/{idPerson}")
     public ResponseEntity<?> save(@PathVariable("idPerson") Integer idPerson, @RequestBody ProjectDto projectDto){
     try{
         if(StringUtils.isBlank(projectDto.getIdPerson().toString()))

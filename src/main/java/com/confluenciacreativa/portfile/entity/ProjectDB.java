@@ -26,7 +26,7 @@ public class ProjectDB {
     @Column(name = "letter_pro")
     private String letterDB;
 
-    @Column(name = "text_pro")
+    @Column(name = "text_pro", columnDefinition = "VARCHAR(2048)")
     private String textDB;
 
     @Column(name = "viewmore_pro")
