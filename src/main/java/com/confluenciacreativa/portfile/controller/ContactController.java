@@ -78,7 +78,11 @@ public class ContactController {
     public ResponseEntity<?> delete(@PathVariable("id") Integer idContact){
         if(!contactService.existsById(idContact))
             return new ResponseEntity(new Message("No existe"), HttpStatus.OK);
-        contactService.delete(idContact);
-        return new ResponseEntity(new Message("Mensaje de contacto borrado"), HttpStatus.OK);
+        try {
+            contactService.delete(idContact);
+            return new ResponseEntity(new Message("Mensaje de contacto borrado"), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(new Message("No se puede borrar este mensaje"), HttpStatus.BAD_REQUEST);
+        }
     }
 }

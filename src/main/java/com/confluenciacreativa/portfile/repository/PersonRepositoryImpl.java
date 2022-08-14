@@ -56,9 +56,10 @@ public class PersonRepositoryImpl implements PersonRepository{
     }
 
     @Override
-    public void save(Person person) {
+    public Person save(Person person) {
         PersonDB personDB = mapper.toPersonDB(person);
-        personCrudRepository.save(personDB);
+        PersonDB newPersonDB = personCrudRepository.save(personDB);
+        return mapper.toPerson(newPersonDB);
     }
 
     @Override

@@ -14,6 +14,6 @@ public interface PersonRepository {
     Optional<Person> getPerson(Integer idPerson);
     Optional<Person> findByUserName(String userName);
     Optional<Person> findByEmail(String email);
-    void save(Person person);
+    Person save(Person person);
     void delete(Integer idPerson);
 }

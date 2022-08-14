@@ -37,7 +37,7 @@ public class PersonController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody PersonDto personDto){
+    public ResponseEntity<Integer> save(@RequestBody PersonDto personDto){
         if(StringUtils.isBlank(personDto.getName()))
             return new ResponseEntity(new Message("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(personDto.getLastname()))
@@ -95,8 +95,11 @@ public class PersonController {
                                 personDto.getInstagram(),
                                 personDto.getTwitter()
         );
-        personService.save(person);
-        return new ResponseEntity(new Message("Persona creada"), HttpStatus.CREATED);
+        try{
+            return new ResponseEntity<Integer>(personService.save(person), HttpStatus.CREATED);
+        }catch (Exception e) {
+            return new ResponseEntity(new Message("No guardado"), HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/update/{id}")
@@ -170,11 +173,15 @@ public class PersonController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Integer idPerson){
-        if(!personService.existsById(idPerson))
-            return  new ResponseEntity(new Message("No existe"), HttpStatus.OK);
-        personService.delete(idPerson);
-        return new ResponseEntity(new Message("Persona dada de baja"), HttpStatus.OK);
+    public ResponseEntity<?> delete(@PathVariable("id") Integer idPerson) {
+        if (!personService.existsById(idPerson))
+            return new ResponseEntity(new Message("No existe"), HttpStatus.OK);
+        try {
+            personService.delete(idPerson);
+            return new ResponseEntity(new Message("Persona dada de baja"), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(new Message("No se puede dar de baja esta persona"), HttpStatus.BAD_REQUEST);
+        }
     }
 
     private boolean emailValidator(String email){

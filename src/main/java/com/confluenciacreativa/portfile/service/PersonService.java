@@ -40,8 +40,12 @@ public class PersonService {
 
     public Optional<Person> findByEmail(String email){return personRepository.findByEmail(email);}
 
-    public void save(Person person){
-        personRepository.save(person);
+    public Integer save(Person person){
+        try{
+            return personRepository.save(person).getIdPerson();
+        } catch (Exception e){
+            return null;
+        }
     }
 
     public Boolean delete(Integer idPerson){

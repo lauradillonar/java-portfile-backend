@@ -107,8 +107,12 @@ public class ProjectController {
     public ResponseEntity<?> delete(@PathVariable("id") Integer idProject){
         if(!projectService.existsById(idProject))
             return  new ResponseEntity(new Message("No existe"), HttpStatus.OK);
-        projectService.delete(idProject);
-        return new ResponseEntity(new Message("Proyecto borrado"), HttpStatus.OK);
+        try {
+            projectService.delete(idProject);
+            return new ResponseEntity(new Message("Proyecto borrado"), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(new Message("No se puede borrar este proyecto"), HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

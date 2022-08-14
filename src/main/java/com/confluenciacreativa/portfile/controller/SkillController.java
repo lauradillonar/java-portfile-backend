@@ -105,7 +105,11 @@ public class SkillController {
     public ResponseEntity<?> delete(@PathVariable("id") Integer idSkill){
         if(!skillService.existsById(idSkill))
             return new ResponseEntity(new Message("No exite"), HttpStatus.OK);
-        skillService.delete(idSkill);
-        return new ResponseEntity(new Message("Tecnología borrada"), HttpStatus.OK);
+        try {
+            skillService.delete(idSkill);
+            return new ResponseEntity(new Message("Tecnología borrada"), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(new Message("No se puede borrar esta tecnología"), HttpStatus.BAD_REQUEST);
+        }
     }
 }

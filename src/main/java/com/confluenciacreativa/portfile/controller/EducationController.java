@@ -121,7 +121,11 @@ public class EducationController {
     public ResponseEntity<?> delete(@PathVariable("id") Integer idEducation){
         if(!educationService.existsById(idEducation))
             return new ResponseEntity(new Message("No existe"), HttpStatus.OK);
-        educationService.delete(idEducation);
-        return new ResponseEntity(new Message("Datos de educación borrados"), HttpStatus.OK);
+        try {
+            educationService.delete(idEducation);
+            return new ResponseEntity(new Message("Datos de educación borrados"), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(new Message("No se pueden borrar estos datos"), HttpStatus.BAD_REQUEST);
+        }
     }
 }

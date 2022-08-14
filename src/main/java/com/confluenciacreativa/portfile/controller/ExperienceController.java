@@ -131,7 +131,11 @@ public class ExperienceController {
     public ResponseEntity<?> delete(@PathVariable("id") Integer idExperience){
         if(!experienceService.existsById(idExperience))
             return  new ResponseEntity(new Message("No existe"), HttpStatus.OK);
-        experienceService.delete(idExperience);
-        return  new ResponseEntity(new Message("Experiencia borrada"), HttpStatus.OK);
+        try {
+            experienceService.delete(idExperience);
+            return new ResponseEntity(new Message("Experiencia borrada"), HttpStatus.OK);
+        }catch(Exception e){
+            return  new ResponseEntity(new Message("No se puede borrar esta experiencia"), HttpStatus.BAD_REQUEST);
+        }
     }
 }
