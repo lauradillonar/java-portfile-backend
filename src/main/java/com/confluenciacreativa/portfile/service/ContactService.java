@@ -24,6 +24,10 @@ public class ContactService {
         return contactRepository.getByPerson(idPerson);
     }
 
+    public Boolean existsByIdPerson(Integer idPerson){
+        return contactRepository.existsByIdPerson(idPerson);
+    }
+
     public Boolean existsById(Integer idContact){
         return contactRepository.existsById(idContact);
     }

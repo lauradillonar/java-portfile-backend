@@ -44,6 +44,12 @@ public class ContactController {
                 .orElse(new ResponseEntity(new Message("No existe"), HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/inbox/{idPerson}")
+    public ResponseEntity<Boolean> existsByIdPerson(@PathVariable("idPerson") Integer idPerson){
+        Boolean exists = contactService.existsByIdPerson(idPerson);
+        return new ResponseEntity<Boolean>(exists, HttpStatus.OK);
+    }
+
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody ContactDto contactDto){
     try{
@@ -66,5 +72,13 @@ public class ContactController {
         );
         contactService.save(contact);
         return new ResponseEntity(new Message("Mensaje de contacto guardado"), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Integer idContact){
+        if(!contactService.existsById(idContact))
+            return new ResponseEntity(new Message("No existe"), HttpStatus.OK);
+        contactService.delete(idContact);
+        return new ResponseEntity(new Message("Mensaje de contacto borrado"), HttpStatus.OK);
     }
 }

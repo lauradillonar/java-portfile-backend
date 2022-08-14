@@ -110,6 +110,7 @@ public class EducationController {
         storedEducation.setText1(education.getText1());
         storedEducation.setLink(education.getLink());
         storedEducation.setUrl(education.getUrl());
+        storedEducation.setText2(education.getText2());
         storedEducation.setViewmore(education.getViewmore());
 
         educationService.save(storedEducation);

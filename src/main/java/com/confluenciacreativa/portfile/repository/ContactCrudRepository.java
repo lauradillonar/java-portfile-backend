@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ContactCrudRepository  extends CrudRepository<ContactDB, Integer> {
     List<ContactDB> findByIdPersonDB(Integer idPersonDB);
+
+    Boolean existsByIdPersonDB(Integer idPersonDB);
 }

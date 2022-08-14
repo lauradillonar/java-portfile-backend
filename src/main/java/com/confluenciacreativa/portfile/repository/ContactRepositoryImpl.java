@@ -32,6 +32,11 @@ public class ContactRepositoryImpl implements ContactRepository{
     }
 
     @Override
+    public Boolean existsByIdPerson(Integer idPerson) {
+        return contactCrudRepository.existsByIdPersonDB(idPerson);
+    }
+
+    @Override
     public Boolean existsById(Integer idContact) {
         return contactCrudRepository.existsById(idContact);
     }
