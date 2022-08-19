@@ -121,6 +121,7 @@ public class ExperienceController {
         storedExperience.setUrl1(experience.getUrl1());
         storedExperience.setLink2(experience.getLink2());
         storedExperience.setUrl2(experience.getUrl2());
+        storedExperience.setLink3(experience.getLink3());
         storedExperience.setUrl3(experience.getUrl3());
 
         experienceService.save(storedExperience);
