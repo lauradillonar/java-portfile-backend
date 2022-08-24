@@ -17,12 +17,14 @@ public interface ContactMapper {
             @Mapping(source = "idPersonDB", target = "idPerson"),
             @Mapping(source = "textNameDB", target = "textName"),
             @Mapping(source = "textEmailDB", target = "textEmail"),
-            @Mapping(source = "textMessageDB", target = "textMessage"),
-            @Mapping(source = "personDB", target = "person")
+            @Mapping(source = "textMessageDB", target = "textMessage")
     })
     Contact toContact(ContactDB contactDB);
     List<Contact> toContacts(List<ContactDB> contactsDB);
 
     @InheritInverseConfiguration
+    @Mappings({
+            @Mapping(target = "personDB", ignore = true)
+    })
     ContactDB toContactDB(Contact contact);
 }

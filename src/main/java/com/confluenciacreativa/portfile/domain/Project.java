@@ -9,7 +9,6 @@ public class Project {
     private String letter;
     private String text;
     private String viewmore;
-    private Person person;
 
     public Project() {
     }
@@ -84,11 +83,4 @@ public class Project {
         this.viewmore = viewmore;
     }
 
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
 }

@@ -15,12 +15,14 @@ public interface SkillMapper {
             @Mapping(source = "idSkillDB", target = "idSkill"),
             @Mapping(source = "idPersonDB", target = "idPerson"),
             @Mapping(source = "itemDB", target = "item"),
-            @Mapping(source = "progressDB", target = "progress"),
-            @Mapping(source = "personDB", target = "person"),
+            @Mapping(source = "progressDB", target = "progress")
     })
     Skill toSkill(SkillDB skillDB);
     List<Skill> toSkills(List<SkillDB> skillsDB);
 
     @InheritInverseConfiguration
+    @Mappings({
+        @Mapping(target = "personDB", ignore = true)
+    })
     SkillDB toSkillDB(Skill skill);
 }

@@ -21,12 +21,14 @@ public interface EducationMapper {
             @Mapping(source="linkDB", target = "link"),
             @Mapping(source="urlDB", target = "url"),
             @Mapping(source="text2DB", target = "text2"),
-            @Mapping(source="viewmoreDB", target = "viewmore"),
-            @Mapping(source="personDB", target = "person"),
+            @Mapping(source="viewmoreDB", target = "viewmore")
     })
     Education toEducation(EducationDB educationDB);
     List<Education> toEducations(List<EducationDB> educationsDB);
 
     @InheritInverseConfiguration
+    @Mappings({
+            @Mapping(target = "personDB", ignore = true)
+    })
     EducationDB toEducationDB(Education education);
 }

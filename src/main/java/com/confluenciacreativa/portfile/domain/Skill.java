@@ -6,7 +6,6 @@ public class Skill {
     private Integer idPerson;
     private String item;
     private Integer progress;
-    private Person person;
 
     public Skill() {
     }
@@ -51,11 +50,4 @@ public class Skill {
         this.progress = progress;
     }
 
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
 }
