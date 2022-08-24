@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -23,6 +24,7 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
     public ResponseEntity<List<Person>> getAll() {
         return new ResponseEntity<>(personService.getAll(), HttpStatus.OK);
@@ -36,6 +38,7 @@ public class PersonController {
         return new ResponseEntity<Person>(person, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save")
     public ResponseEntity<Integer> save(@RequestBody PersonDto personDto){
         if(StringUtils.isBlank(personDto.getName()))
@@ -102,6 +105,7 @@ public class PersonController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Integer idPerson, @RequestBody PersonDto personDto){
         if(!personService.existsById(idPerson))
@@ -172,6 +176,7 @@ public class PersonController {
         return new ResponseEntity(new Message("Datos actualizados"), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer idPerson) {
         if (!personService.existsById(idPerson))

@@ -10,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
     public ResponseEntity<List<Project>> getAll() {
         return new ResponseEntity<>(projectService.getAll(), HttpStatus.OK);
@@ -44,6 +46,7 @@ public class ProjectController {
                 .orElse(new ResponseEntity(new Message("No existe"), HttpStatus.NOT_FOUND));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save/{idPerson}")
     public ResponseEntity<?> save(@PathVariable("idPerson") Integer idPerson, @RequestBody ProjectDto projectDto){
     try{
@@ -53,6 +56,8 @@ public class ProjectController {
             return new ResponseEntity(new Message("Un título del proyecto es requerido"), HttpStatus.BAD_REQUEST);
         if(projectService.existsByTitleAndIdPerson(projectDto.getTitle(), idPerson))
             return new ResponseEntity(new Message("Ese título de proyecto ya existe"), HttpStatus.BAD_REQUEST);
+        if(idPerson != projectDto.getIdPerson())
+            return new ResponseEntity(new Message("No autorizado"), HttpStatus.BAD_REQUEST);
     }catch(Exception e){
         return new ResponseEntity(new Message("Datos inválidos"), HttpStatus.BAD_REQUEST);
     }
@@ -68,6 +73,7 @@ public class ProjectController {
         return new ResponseEntity(new Message("Proyecto agregado"), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{idPerson}/{idProject}")
     public ResponseEntity<?> update(
             @PathVariable("idPerson") Integer idPerson,
@@ -88,6 +94,8 @@ public class ProjectController {
                 return new ResponseEntity(new Message("Ese proyecto ya existe"), HttpStatus.BAD_REQUEST);
             if(idPerson != projectService.getProject(project.getIdProject()).get().getIdPerson())
                 return new ResponseEntity(new Message("No autorizado"), HttpStatus.BAD_REQUEST);
+            if(idPerson != project.getIdPerson())
+                return new ResponseEntity(new Message("No autorizado"), HttpStatus.BAD_REQUEST);
         }catch(Exception e){
             return new ResponseEntity(new Message("Datos inválidos"), HttpStatus.BAD_REQUEST);
         }
@@ -103,6 +111,7 @@ public class ProjectController {
         return new ResponseEntity(new Message("Datos actualizados"), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer idProject){
         if(!projectService.existsById(idProject))

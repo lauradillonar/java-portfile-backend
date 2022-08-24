@@ -10,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class ExperienceController {
     @Autowired
     private ExperienceService experienceService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
     public ResponseEntity<List<Experience>> getAll(){
         return new ResponseEntity<>(experienceService.getAll(), HttpStatus.OK);
@@ -44,6 +46,7 @@ public class ExperienceController {
                 .orElse(new ResponseEntity(new Message("No existe"), HttpStatus.NOT_FOUND));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save/{idPerson}")
     public ResponseEntity<?> save(@PathVariable("idPerson") Integer idPerson, @RequestBody ExperienceDto experienceDto){
     try {
@@ -59,6 +62,8 @@ public class ExperienceController {
             return new ResponseEntity(new Message("El lugar de la experiencia es requerido"), HttpStatus.BAD_REQUEST);
         if(experienceService.existsByTitleAndIdPerson(experienceDto.getTitle(), idPerson))
             return new ResponseEntity(new Message("Esa experiencia ya existe"), HttpStatus.BAD_REQUEST);
+        if(idPerson != experienceDto.getIdPerson())
+            return new ResponseEntity(new Message("No autorizado"), HttpStatus.BAD_REQUEST);
     }catch(Exception e){
         return new ResponseEntity(new Message("Datos inválidos"), HttpStatus.BAD_REQUEST);
     }
@@ -80,6 +85,7 @@ public class ExperienceController {
         return new ResponseEntity(new Message("Experiencia agregada"), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{idPerson}/{idExperience}")
     public ResponseEntity<?> update(
             @PathVariable("idPerson") Integer idPerson ,
@@ -107,6 +113,8 @@ public class ExperienceController {
                 return new ResponseEntity(new Message("Esa experiencia ya existe"), HttpStatus.BAD_REQUEST);
         if(idPerson != experienceService.getExperience(experience.getIdExperience()).get().getIdPerson())
             return new ResponseEntity(new Message("No autorizado"), HttpStatus.BAD_REQUEST);
+        if(idPerson != experience.getIdPerson())
+            return new ResponseEntity(new Message("No autorizado"), HttpStatus.BAD_REQUEST);
     }catch(Exception e){
         return new ResponseEntity(new Message("Datos inválidos"), HttpStatus.BAD_REQUEST);
     }
@@ -128,6 +136,7 @@ public class ExperienceController {
         return new ResponseEntity(new Message("Datos actualizados"), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer idExperience){
         if(!experienceService.existsById(idExperience))
