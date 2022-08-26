@@ -3,6 +3,8 @@ package com.confluenciacreativa.portfile.controller;
 import com.confluenciacreativa.portfile.domain.Person;
 import com.confluenciacreativa.portfile.dto.Message;
 import com.confluenciacreativa.portfile.dto.PersonDto;
+import com.confluenciacreativa.portfile.dto.PersonRes;
+import com.confluenciacreativa.portfile.security.service.UserService;
 import com.confluenciacreativa.portfile.service.PersonService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +26,20 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/all")
-    public ResponseEntity<List<Person>> getAll() {
+    public ResponseEntity<List<PersonRes>> getAll() {
         return new ResponseEntity<>(personService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Person> getPerson (@PathVariable("id") Integer idPerson) {
+    public ResponseEntity<PersonRes> getPerson (@PathVariable("id") Integer idPerson) {
         if(!personService.existsById(idPerson))
             return new ResponseEntity(new Message("No existe"), HttpStatus.NOT_FOUND);
-        Person person = personService.getPerson(idPerson).get();
-        return new ResponseEntity<Person>(person, HttpStatus.OK);
+        PersonRes personRes = personService.getPerson(idPerson).get();
+        return new ResponseEntity<PersonRes>(personRes, HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -45,8 +49,6 @@ public class PersonController {
             return new ResponseEntity(new Message("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(personDto.getLastname()))
             return new ResponseEntity(new Message("El apellido es obligatorio"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(personDto.getUserName()))
-            return new ResponseEntity(new Message("El nombre de usuario es obligatorio"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(personDto.getBirthdate()))
             return new ResponseEntity(new Message("La fecha de nacimiento es obligatoria"), HttpStatus.BAD_REQUEST);
         try{
@@ -56,12 +58,6 @@ public class PersonController {
         }
         if(StringUtils.isBlank(personDto.getNationality()))
             return new ResponseEntity(new Message("La nacionalidad es requerida"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(personDto.getEmail()))
-            return new ResponseEntity(new Message("El email es requerido"), HttpStatus.BAD_REQUEST);
-        if (!emailValidator(personDto.getEmail()))
-            return new ResponseEntity(new Message("Email inválido"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(personDto.getPassword()))
-            return new ResponseEntity(new Message("La contraseña es requerida"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(personDto.getPhone()))
             return new ResponseEntity(new Message("El teléfono es requerido"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(personDto.getAboutMeSub()))
@@ -70,25 +66,19 @@ public class PersonController {
             return new ResponseEntity(new Message("Una breve descripción es requerida"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(personDto.getJob()))
             return new ResponseEntity(new Message("La profesión actual es requerida"), HttpStatus.BAD_REQUEST);
-        if(personService.existsByUserName(personDto.getUserName()))
-            return new ResponseEntity(new Message("Ese nombre de usuario ya existe"), HttpStatus.BAD_REQUEST);
-        if(personService.existsByEmail(personDto.getEmail()))
-            return new ResponseEntity(new Message("Ese email ya existe"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(personDto.getLocation()))
             return new ResponseEntity(new Message("El lugar es requerido"), HttpStatus.BAD_REQUEST);
         Person person = new Person(
                                 personDto.getName(),
                                 personDto.getLastname(),
-                                personDto.getUserName(),
                                 LocalDateTime.parse(personDto.getBirthdate()),
                                 personDto.getNationality(),
-                                personDto.getEmail(),
-                                personDto.getPassword(),
                                 personDto.getPhone(),
                                 personDto.getAboutMeSub(),
                                 personDto.getAboutMe(),
                                 personDto.getJob(),
                                 personDto.getLocation(),
+                                personDto.getUser(),
                                 personDto.getImageHeader(),
                                 personDto.getImage(),
                                 personDto.getLogoSrc(),
@@ -110,17 +100,17 @@ public class PersonController {
     public ResponseEntity<?> update(@PathVariable("id") Integer idPerson, @RequestBody PersonDto personDto){
         if(!personService.existsById(idPerson))
             return  new ResponseEntity(new Message("No existe"), HttpStatus.NOT_FOUND);
-        if(personService.existsByUserName(personDto.getUserName())
-            && personService.findByUserName(personDto.getUserName()).get().getIdPerson() != idPerson)
+        if(userService.existsByUserName(personDto.getUser().getUserName())
+            && userService.getByUserName(personDto.getUser().getUserName()).get().getPersonDB().getIdPersonDB() != idPerson)
             return  new ResponseEntity(new Message("Ese nombre de usuario ya existe"), HttpStatus.BAD_REQUEST);
-        if(personService.existsByEmail(personDto.getEmail())
-            && personService.findByEmail(personDto.getEmail()).get().getIdPerson() != idPerson)
+        if(userService.existsByEmail(personDto.getUser().getEmail())
+            && userService.findByEmail(personDto.getUser().getEmail()).get().getPersonDB().getIdPersonDB() != idPerson)
             return new ResponseEntity(new Message("Ese email ya existe"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(personDto.getName()))
             return new ResponseEntity(new Message("El nombre es requerido"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(personDto.getLastname()))
             return new ResponseEntity(new Message("El apellido es requerido"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(personDto.getUserName()))
+        if(StringUtils.isBlank(personDto.getUser().getUserName()))
             return new ResponseEntity(new Message("El nombre de usuario es requerido"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(personDto.getBirthdate()))
             return new ResponseEntity(new Message("La fecha de nacimiento es requerida"), HttpStatus.BAD_REQUEST);
@@ -131,13 +121,13 @@ public class PersonController {
         }
         if(StringUtils.isBlank(personDto.getNationality()))
             return new ResponseEntity(new Message("La nacionalidad es requerida"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(personDto.getEmail()))
+        if(StringUtils.isBlank(personDto.getUser().getEmail()))
             return new ResponseEntity(new Message("El email es requerido"), HttpStatus.BAD_REQUEST);
 
-        if (!emailValidator(personDto.getEmail()))
+        if (!emailValidator(personDto.getUser().getEmail()))
             return new ResponseEntity(new Message("Email inválido"), HttpStatus.BAD_REQUEST);
 
-        if(StringUtils.isBlank(personDto.getPassword()))
+        if(StringUtils.isBlank(personDto.getUser().getPassword()))
             return new ResponseEntity(new Message("La contraseña es requerida"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(personDto.getPhone()))
             return new ResponseEntity(new Message("El teléfono es requerido"), HttpStatus.BAD_REQUEST);

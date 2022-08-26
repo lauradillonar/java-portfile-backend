@@ -1,54 +1,78 @@
-package com.confluenciacreativa.portfile.domain;
+package com.confluenciacreativa.portfile.dto;
 
-import com.confluenciacreativa.portfile.security.entity.User;
+import jdk.vm.ci.meta.Local;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
-public class Person {
+public class PersonRes {
 
+    @NotBlank
     private Integer idPerson;
+
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String lastname;
+
+    @NotBlank
     private LocalDateTime birthdate;
+
+    @NotBlank
     private String nationality;
+
+    @NotBlank
     private String phone;
+
+    @NotBlank
     private String aboutMeSub;
+
+    @NotBlank
     private String aboutMe;
+
+    @NotBlank
     private String job;
+
+    @NotBlank
     private String location;
-    private User user;
+
+    @NotBlank
+    private Integer idUser;
+
     private String imageHeader;
     private String image;
     private String logoSrc;
     private String logoAlt;
     private String logoUrl;
+
     private String facebook;
     private String instagram;
     private String twitter;
 
-    public Person() {
+    public PersonRes() {
     }
 
-    public Person(
-            String name,
-            String lastname,
-            LocalDateTime birthdate,
-            String nationality,
-            String phone,
-            String aboutMeSub,
-            String aboutMe,
-            String job,
-            String location,
-            User user,
-            String imageHeader,
-            String image,
-            String logoSrc,
-            String logoAlt,
-            String logoUrl,
-            String facebook,
-            String instagram,
-            String twitter
-            ) {
+    public PersonRes(Integer idPerson,
+                     String name,
+                     String lastname,
+                     LocalDateTime birthdate,
+                     String nationality,
+                     String phone,
+                     String aboutMeSub,
+                     String aboutMe,
+                     String job,
+                     String location,
+                     Integer idUser,
+                     String imageHeader,
+                     String image,
+                     String logoSrc,
+                     String logoAlt,
+                     String logoUrl,
+                     String facebook,
+                     String instagram,
+                     String twitter) {
+        this.idPerson = idPerson;
         this.name = name;
         this.lastname = lastname;
         this.birthdate = birthdate;
@@ -58,7 +82,7 @@ public class Person {
         this.aboutMe = aboutMe;
         this.job = job;
         this.location = location;
-        this.user = user;
+        this.idUser = idUser;
         this.imageHeader = imageHeader;
         this.image = image;
         this.logoSrc = logoSrc;
@@ -117,9 +141,13 @@ public class Person {
         this.phone = phone;
     }
 
-    public String getAboutMeSub() { return  aboutMeSub;}
+    public String getAboutMeSub() {
+        return aboutMeSub;
+    }
 
-    public void setAboutMeSub(String aboutMeSub) { this.aboutMeSub = aboutMeSub; }
+    public void setAboutMeSub(String aboutMeSub) {
+        this.aboutMeSub = aboutMeSub;
+    }
 
     public String getAboutMe() {
         return aboutMe;
@@ -143,6 +171,14 @@ public class Person {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Integer getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
     }
 
     public String getImageHeader() {
@@ -207,13 +243,5 @@ public class Person {
 
     public void setTwitter(String twitter) {
         this.twitter = twitter;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }

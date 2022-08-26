@@ -1,5 +1,7 @@
 package com.confluenciacreativa.portfile.dto;
 
+import com.confluenciacreativa.portfile.security.entity.User;
+
 import javax.validation.constraints.NotBlank;
 
 public class PersonDto {
@@ -11,19 +13,10 @@ public class PersonDto {
     private String lastname;
 
     @NotBlank
-    private String userName;
-
-    @NotBlank
     private String birthdate;
 
     @NotBlank
     private String nationality;
-
-    @NotBlank
-    private String email;
-
-    @NotBlank
-    private String password;
 
     @NotBlank
     private String phone;
@@ -39,6 +32,9 @@ public class PersonDto {
 
     @NotBlank
     private String location;
+
+    @NotBlank
+    private User user;
 
     private String imageHeader;
     private String image;
@@ -56,16 +52,14 @@ public class PersonDto {
     public PersonDto(
             String name,
             String lastname,
-            String userName,
             String birthdate,
             String nationality,
-            String email,
-            String password,
             String phone,
             String aboutMeSub,
             String aboutMe,
             String job,
             String location,
+            User user,
             String imageHeader,
             String image,
             String logoSrc,
@@ -76,16 +70,14 @@ public class PersonDto {
             String twitter) {
         this.name = name;
         this.lastname = lastname;
-        this.userName = userName;
         this.birthdate = birthdate;
         this.nationality = nationality;
-        this.email = email;
-        this.password = password;
         this.phone = phone;
         this.aboutMeSub = aboutMeSub;
         this.aboutMe = aboutMe;
         this.job = job;
         this.location = location;
+        this.user = user;
         this.imageHeader = imageHeader;
         this.image = image;
         this.logoSrc = logoSrc;
@@ -112,14 +104,6 @@ public class PersonDto {
         this.lastname = lastname;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getBirthdate() {
         return birthdate;
     }
@@ -134,22 +118,6 @@ public class PersonDto {
 
     public void setNationality(String nationality) {
         this.nationality = nationality;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPhone() {
@@ -254,5 +222,13 @@ public class PersonDto {
 
     public void setTwitter(String twitter) {
         this.twitter = twitter;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

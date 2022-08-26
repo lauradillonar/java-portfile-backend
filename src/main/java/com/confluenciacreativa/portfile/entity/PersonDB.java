@@ -1,7 +1,7 @@
 package com.confluenciacreativa.portfile.entity;
 
+import com.confluenciacreativa.portfile.security.entity.User;
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,25 +24,12 @@ public class PersonDB {
     private String lastnameDB;
 
     @NotNull
-    @Column (name = "user", unique = true)
-    private String userNameDB;
-
-    @NotNull
     @Column (name= "birth" ,columnDefinition = "DATETIME")
     private LocalDateTime birthdateDB;
 
     @NotNull
     @Column (name = "citizenship")
     private String nationalityDB;
-
-    @NotNull
-    @Email
-    @Column (name = "mail", unique = true)
-    private String emailDB;
-
-    @NotNull
-    @Column (name = "user_key")
-    private String passwordDB;
 
     @NotNull
     @Column (name = "telephone")
@@ -103,44 +90,41 @@ public class PersonDB {
     @OneToMany(mappedBy = "personDB")
     private List<ContactDB>contactsDB;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_userDB")
+    private User userDB;
+
     public PersonDB() {
     }
 
     public PersonDB(
             String nameDB,
             String lastnameDB,
-            String userNameDB,
             LocalDateTime birthdateDB,
             String nationalityDB,
-            String emailDB,
-            String passwordDB,
             String phoneDB,
             String aboutMeSubDB,
             String aboutMeDB,
             String jobDB,
-            String locationDB) {
+            String locationDB,
+            User userDB) {
         this.nameDB = nameDB;
         this.lastnameDB = lastnameDB;
-        this.userNameDB = userNameDB;
         this.birthdateDB = birthdateDB;
         this.nationalityDB = nationalityDB;
-        this.emailDB = emailDB;
-        this.passwordDB = passwordDB;
         this.phoneDB = phoneDB;
         this.aboutMeSubDB = aboutMeSubDB;
         this.aboutMeDB = aboutMeDB;
         this.jobDB = jobDB;
         this.locationDB = locationDB;
+        this.userDB = userDB;
     }
 
     public PersonDB(
             String nameDB,
             String lastnameDB,
-            String userNameDB,
             LocalDateTime birthdateDB,
             String nationalityDB,
-            String emailDB,
-            String passwordDB,
             String phoneDB,
             String aboutMeSubDB,
             String aboutMeDB,
@@ -153,14 +137,12 @@ public class PersonDB {
             String logoUrlDB,
             String facebookDB,
             String instagramDB,
-            String twitterDB) {
+            String twitterDB,
+            User userDB) {
         this.nameDB = nameDB;
         this.lastnameDB = lastnameDB;
-        this.userNameDB = userNameDB;
         this.birthdateDB = birthdateDB;
         this.nationalityDB = nationalityDB;
-        this.emailDB = emailDB;
-        this.passwordDB = passwordDB;
         this.phoneDB = phoneDB;
         this.aboutMeSubDB = aboutMeSubDB;
         this.aboutMeDB = aboutMeDB;
@@ -174,6 +156,7 @@ public class PersonDB {
         this.facebookDB = facebookDB;
         this.instagramDB = instagramDB;
         this.twitterDB = twitterDB;
+        this.userDB = userDB;
     }
 
     public Integer getIdPersonDB() {
@@ -200,14 +183,6 @@ public class PersonDB {
         this.lastnameDB = lastnameDB;
     }
 
-    public String getUserNameDB() {
-        return userNameDB;
-    }
-
-    public void setUserNameDB(String userNameDB) {
-        this.userNameDB = userNameDB;
-    }
-
     public LocalDateTime getBirthdateDB() {
         return birthdateDB;
     }
@@ -224,21 +199,6 @@ public class PersonDB {
         this.nationalityDB = nationalityDB;
     }
 
-    public String getEmailDB() {
-        return emailDB;
-    }
-
-    public void setEmailDB(String emailDB) {
-        this.emailDB = emailDB;
-    }
-
-    public String getPasswordDB() {
-        return passwordDB;
-    }
-
-    public void setPasswordDB(String passwordDB) {
-        this.passwordDB = passwordDB;
-    }
 
     public String getPhoneDB() {
         return phoneDB;
@@ -382,5 +342,13 @@ public class PersonDB {
 
     public void setContactsDB(List<ContactDB> contactsDB) {
         this.contactsDB = contactsDB;
+    }
+
+    public User getUserDB() {
+        return userDB;
+    }
+
+    public void setUserDB(User userDB) {
+        this.userDB = userDB;
     }
 }

@@ -8,9 +8,6 @@ import java.util.Set;
 public class NewUser {
 
     @NotBlank
-    private String name;
-
-    @NotBlank
     private String userName;
 
     @NotBlank
@@ -21,14 +18,6 @@ public class NewUser {
     private String password;
 
     private Set<String> roles = new HashSet<>();
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getUserName() {
         return userName;

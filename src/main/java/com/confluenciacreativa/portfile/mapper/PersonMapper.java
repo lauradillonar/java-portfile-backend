@@ -15,11 +15,8 @@ public interface PersonMapper {
             @Mapping(source = "idPersonDB", target = "idPerson"),
             @Mapping(source = "nameDB", target = "name"),
             @Mapping(source = "lastnameDB", target = "lastname"),
-            @Mapping(source = "userNameDB", target = "userName"),
             @Mapping(source = "birthdateDB", target = "birthdate"),
             @Mapping(source = "nationalityDB", target = "nationality"),
-            @Mapping(source = "emailDB", target = "email"),
-            @Mapping(source = "passwordDB", target = "password"),
             @Mapping(source = "phoneDB", target = "phone"),
             @Mapping(source = "aboutMeSubDB", target = "aboutMeSub"),
             @Mapping(source = "aboutMeDB", target = "aboutMe"),
@@ -32,7 +29,8 @@ public interface PersonMapper {
             @Mapping(source = "logoUrlDB", target = "logoUrl"),
             @Mapping(source = "facebookDB", target = "facebook"),
             @Mapping(source = "instagramDB", target = "instagram"),
-            @Mapping(source = "twitterDB", target = "twitter")
+            @Mapping(source = "twitterDB", target = "twitter"),
+            @Mapping(source = "userDB", target = "user"),
     })
     Person toPerson(PersonDB personDB);
     List<Person> toPersons(List<PersonDB> personsDB);

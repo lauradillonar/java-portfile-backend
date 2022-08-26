@@ -1,5 +1,7 @@
 package com.confluenciacreativa.portfile.security.entity;
 
+import com.confluenciacreativa.portfile.entity.PersonDB;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
@@ -11,9 +13,6 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @NotNull
-    private String name;
 
     @NotNull
     @Column(unique = true)
@@ -32,11 +31,13 @@ public class User {
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private PersonDB personDB;
+
     public User() {
     }
 
-    public User(String name, String userName, String email, String password) {
-        this.name = name;
+    public User(String userName, String email, String password) {
         this.userName = userName;
         this.email = email;
         this.password = password;
@@ -48,14 +49,6 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getUserName() {
@@ -88,5 +81,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public PersonDB getPersonDB() {
+        return personDB;
+    }
+
+    public void setPersonDB(PersonDB personDB) {
+        this.personDB = personDB;
     }
 }

@@ -31,29 +31,19 @@ public class PersonRepositoryImpl implements PersonRepository{
     }
 
     @Override
-    public Boolean existsByUserName(String userName) {
-        return personCrudRepository.existsByUserNameDB(userName);
-    }
-
-    @Override
-    public Boolean existsByEmail(String email) {
-        return personCrudRepository.existsByEmailDB(email);
-    }
-
-    @Override
     public Optional<Person> getPerson(Integer idPerson) {
         return personCrudRepository.findById(idPerson).map(personDB -> mapper.toPerson(personDB));
     }
 
-    @Override
-    public Optional<Person> findByUserName(String userName) {
-        return personCrudRepository.findByUserNameDB(userName).map(personDB -> mapper.toPerson(personDB));
-    }
+    //@Override
+    //public Optional<Person> findByUserName(String userName) {
+    //    return personCrudRepository.findByUserNameDB(userName).map(personDB -> mapper.toPerson(personDB));
+    //}
 
-    @Override
-    public Optional<Person> findByEmail(String email) {
-        return personCrudRepository.findByEmailDB(email).map(personDB -> mapper.toPerson(personDB));
-    }
+    //@Override
+    //public Optional<Person> findByEmail(String email) {
+    //   return personCrudRepository.findByEmailDB(email).map(personDB -> mapper.toPerson(personDB));
+    //}
 
     @Override
     public Person save(Person person) {

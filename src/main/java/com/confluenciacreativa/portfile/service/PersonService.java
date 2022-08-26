@@ -1,11 +1,13 @@
 package com.confluenciacreativa.portfile.service;
 
 import com.confluenciacreativa.portfile.domain.Person;
+import com.confluenciacreativa.portfile.dto.PersonRes;
 import com.confluenciacreativa.portfile.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,29 +18,65 @@ public class PersonService {
     @Autowired
     private PersonRepository personRepository;
 
-    public List<Person> getAll(){
-        return personRepository.getAll();
+    public List<PersonRes> getAll(){
+        List<Person> persons = personRepository.getAll();
+        List<PersonRes> personResList = new ArrayList<PersonRes>();
+        persons.forEach(person -> {
+                    personResList.add( new PersonRes(
+                                    person.getIdPerson(),
+                                    person.getName(),
+                                    person.getLastname(),
+                                    person.getBirthdate(),
+                                    person.getNationality(),
+                                    person.getPhone(),
+                                    person.getAboutMeSub(),
+                                    person.getAboutMe(),
+                                    person.getJob(),
+                                    person.getLocation(),
+                                    person.getUser().getId(),
+                                    person.getImageHeader(),
+                                    person.getImage(),
+                                    person.getLogoSrc(),
+                                    person.getLogoAlt(),
+                                    person.getLogoUrl(),
+                                    person.getFacebook(),
+                                    person.getInstagram(),
+                                    person.getTwitter()
+                            ));
+                }
+        );
+        return personResList;
     }
 
     public Boolean existsById(Integer idPerson){
         return personRepository.existsById(idPerson);
     }
 
-    public Boolean existsByUserName(String userName){
-        return personRepository.existsByUserName(userName);
+    public Optional<PersonRes> getPerson(Integer idPerson){
+        Optional<Person> person = personRepository.getPerson(idPerson);
+        return Optional.of(new PersonRes(
+                person.get().getIdPerson(),
+                person.get().getName(),
+                person.get().getLastname(),
+                person.get().getBirthdate(),
+                person.get().getNationality(),
+                person.get().getPhone(),
+                person.get().getAboutMeSub(),
+                person.get().getAboutMe(),
+                person.get().getJob(),
+                person.get().getLocation(),
+                person.get().getUser().getId(),
+                person.get().getImageHeader(),
+                person.get().getImage(),
+                person.get().getLogoSrc(),
+                person.get().getLogoAlt(),
+                person.get().getLogoUrl(),
+                person.get().getFacebook(),
+                person.get().getInstagram(),
+                person.get().getTwitter()
+        ));
     }
 
-    public Boolean existsByEmail(String email){
-        return personRepository.existsByEmail(email);
-    }
-
-    public Optional<Person> getPerson(Integer idPerson){
-        return  personRepository.getPerson(idPerson);
-    }
-
-    public Optional<Person> findByUserName(String userName){return personRepository.findByUserName(userName);}
-
-    public Optional<Person> findByEmail(String email){return personRepository.findByEmail(email);}
 
     public Integer save(Person person){
         try{
