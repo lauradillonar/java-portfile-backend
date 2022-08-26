@@ -1,4 +1,6 @@
-package com.confluenciacreativa.portfile.entity;
+package com.confluenciacreativa.portfile.security.entity;
+
+import com.confluenciacreativa.portfile.entity.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

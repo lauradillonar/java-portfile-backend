@@ -1,7 +1,7 @@
 package com.confluenciacreativa.portfile.mapper;
 
-import com.confluenciacreativa.portfile.domain.Person;
-import com.confluenciacreativa.portfile.entity.PersonDB;
+import com.confluenciacreativa.portfile.security.dto.Person;
+import com.confluenciacreativa.portfile.security.entity.PersonDB;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

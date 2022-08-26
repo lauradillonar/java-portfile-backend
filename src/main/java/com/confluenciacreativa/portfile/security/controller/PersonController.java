@@ -1,9 +1,9 @@
-package com.confluenciacreativa.portfile.controller;
+package com.confluenciacreativa.portfile.security.controller;
 
-import com.confluenciacreativa.portfile.domain.Person;
+import com.confluenciacreativa.portfile.security.dto.Person;
 import com.confluenciacreativa.portfile.dto.Message;
-import com.confluenciacreativa.portfile.dto.PersonDto;
-import com.confluenciacreativa.portfile.service.PersonService;
+import com.confluenciacreativa.portfile.security.dto.PersonDto;
+import com.confluenciacreativa.portfile.security.service.PersonService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

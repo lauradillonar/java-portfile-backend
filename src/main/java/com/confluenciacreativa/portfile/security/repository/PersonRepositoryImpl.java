@@ -1,8 +1,10 @@
-package com.confluenciacreativa.portfile.repository;
+package com.confluenciacreativa.portfile.security.repository;
 
-import com.confluenciacreativa.portfile.domain.Person;
-import com.confluenciacreativa.portfile.entity.PersonDB;
+import com.confluenciacreativa.portfile.security.dto.Person;
+import com.confluenciacreativa.portfile.security.entity.PersonDB;
 import com.confluenciacreativa.portfile.mapper.PersonMapper;
+import com.confluenciacreativa.portfile.security.repository.PersonCrudRepository;
+import com.confluenciacreativa.portfile.security.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class PersonRepositoryImpl implements PersonRepository{
+public class PersonRepositoryImpl implements PersonRepository {
 
     @Autowired
     private PersonCrudRepository personCrudRepository;

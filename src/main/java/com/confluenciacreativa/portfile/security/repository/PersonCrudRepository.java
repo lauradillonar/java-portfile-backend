@@ -1,6 +1,6 @@
-package com.confluenciacreativa.portfile.repository;
+package com.confluenciacreativa.portfile.security.repository;
 
-import com.confluenciacreativa.portfile.entity.PersonDB;
+import com.confluenciacreativa.portfile.security.entity.PersonDB;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

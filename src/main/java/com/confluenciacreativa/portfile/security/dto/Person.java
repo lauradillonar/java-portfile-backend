@@ -1,45 +1,22 @@
-package com.confluenciacreativa.portfile.dto;
+package com.confluenciacreativa.portfile.security.dto;
 
-import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
-public class PersonDto {
+public class Person {
 
-    @NotBlank
+    private Integer idPerson;
     private String name;
-
-    @NotBlank
     private String lastname;
-
-    @NotBlank
     private String userName;
-
-    @NotBlank
-    private String birthdate;
-
-    @NotBlank
+    private LocalDateTime birthdate;
     private String nationality;
-
-    @NotBlank
     private String email;
-
-    @NotBlank
     private String password;
-
-    @NotBlank
     private String phone;
-
-    @NotBlank
     private String aboutMeSub;
-
-    @NotBlank
     private String aboutMe;
-
-    @NotBlank
     private String job;
-
-    @NotBlank
     private String location;
-
     private String imageHeader;
     private String image;
     private String logoSrc;
@@ -47,17 +24,19 @@ public class PersonDto {
     private String logoUrl;
 
     private String facebook;
+
     private String instagram;
+
     private String twitter;
 
-    public PersonDto() {
+    public Person() {
     }
 
-    public PersonDto(
+    public Person(
             String name,
             String lastname,
             String userName,
-            String birthdate,
+            LocalDateTime birthdate,
             String nationality,
             String email,
             String password,
@@ -96,6 +75,14 @@ public class PersonDto {
         this.twitter = twitter;
     }
 
+    public Integer getIdPerson() {
+        return idPerson;
+    }
+
+    public void setIdPerson(Integer idPerson) {
+        this.idPerson = idPerson;
+    }
+
     public String getName() {
         return name;
     }
@@ -120,11 +107,11 @@ public class PersonDto {
         this.userName = userName;
     }
 
-    public String getBirthdate() {
+    public LocalDateTime getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(String birthdate) {
+    public void setBirthdate(LocalDateTime birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -160,13 +147,9 @@ public class PersonDto {
         this.phone = phone;
     }
 
-    public String getAboutMeSub() {
-        return aboutMeSub;
-    }
+    public String getAboutMeSub() { return  aboutMeSub;}
 
-    public void setAboutMeSub(String aboutMeSub) {
-        this.aboutMeSub = aboutMeSub;
-    }
+    public void setAboutMeSub(String aboutMeSub) { this.aboutMeSub = aboutMeSub; }
 
     public String getAboutMe() {
         return aboutMe;
