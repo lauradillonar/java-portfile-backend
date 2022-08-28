@@ -6,7 +6,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "persons")
@@ -104,6 +106,13 @@ public class PersonDB {
 
     @OneToMany(mappedBy = "personDB")
     private List<ContactDB>contactsDB;
+
+    @NotNull
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "person_role",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     public PersonDB() {
     }
@@ -384,5 +393,13 @@ public class PersonDB {
 
     public void setContactsDB(List<ContactDB> contactsDB) {
         this.contactsDB = contactsDB;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

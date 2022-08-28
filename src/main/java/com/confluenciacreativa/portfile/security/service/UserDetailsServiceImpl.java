@@ -1,7 +1,7 @@
 package com.confluenciacreativa.portfile.security.service;
 
+import com.confluenciacreativa.portfile.security.dto.Person;
 import com.confluenciacreativa.portfile.security.entity.MainUser;
-import com.confluenciacreativa.portfile.security.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    UserService userService;
+    PersonService personService;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        User user = userService.getByUserName(userName).get();
-        return MainUser.build(user);
+        Person person = personService.findByUserName(userName).get();
+        return MainUser.build(person);
     }
 }

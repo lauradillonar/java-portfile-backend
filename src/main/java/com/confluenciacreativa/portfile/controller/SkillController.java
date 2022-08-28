@@ -46,7 +46,7 @@ public class SkillController {
                 .orElse(new ResponseEntity(new Message("No existe"), HttpStatus.NOT_FOUND));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/save/{idPerson}")
     public ResponseEntity<?> save(@PathVariable("idPerson") Integer idPerson,@RequestBody SkillDto skillDto){
     try{
@@ -72,7 +72,7 @@ public class SkillController {
         return new ResponseEntity(new Message("Tecnología agregada"), HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     @PutMapping("/update/{idPerson}/{idSkill}")
     public ResponseEntity<?> update(
             @PathVariable("idPerson") Integer idPerson,
@@ -109,7 +109,7 @@ public class SkillController {
         return new ResponseEntity(new Message("Datos actualizados"), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer idSkill){
         if(!skillService.existsById(idSkill))

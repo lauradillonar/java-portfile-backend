@@ -1,6 +1,10 @@
 package com.confluenciacreativa.portfile.security.dto;
 
+import com.confluenciacreativa.portfile.security.entity.Role;
+
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Person {
 
@@ -28,6 +32,8 @@ public class Person {
     private String instagram;
 
     private String twitter;
+
+    private Set<Role> roles = new HashSet<>();
 
     public Person() {
     }
@@ -237,5 +243,13 @@ public class Person {
 
     public void setTwitter(String twitter) {
         this.twitter = twitter;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

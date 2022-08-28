@@ -1,5 +1,6 @@
 package com.confluenciacreativa.portfile.security.entity;
 
+import com.confluenciacreativa.portfile.security.dto.Person;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,16 +29,16 @@ public class MainUser implements UserDetails {
         this.authorities = authorities;
     }
 
-    public static MainUser build(User user){
-        List<GrantedAuthority> authorities = user.getRoles().stream()
+    public static MainUser build(Person person){
+        List<GrantedAuthority> authorities = person.getRoles().stream()
                 .map(
                     role -> new SimpleGrantedAuthority(role.getRoleName().name()))
                 .collect(Collectors.toList());
         return new MainUser(
-                user.getName(),
-                user.getUserName(),
-                user.getEmail(),
-                user.getPassword(),
+                person.getName(),
+                person.getUserName(),
+                person.getEmail(),
+                person.getPassword(),
                 authorities
         );
     }

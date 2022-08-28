@@ -46,7 +46,7 @@ public class ProjectController {
                 .orElse(new ResponseEntity(new Message("No existe"), HttpStatus.NOT_FOUND));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/save/{idPerson}")
     public ResponseEntity<?> save(@PathVariable("idPerson") Integer idPerson, @RequestBody ProjectDto projectDto){
     try{
@@ -73,7 +73,7 @@ public class ProjectController {
         return new ResponseEntity(new Message("Proyecto agregado"), HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     @PutMapping("/update/{idPerson}/{idProject}")
     public ResponseEntity<?> update(
             @PathVariable("idPerson") Integer idPerson,
@@ -111,7 +111,7 @@ public class ProjectController {
         return new ResponseEntity(new Message("Datos actualizados"), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer idProject){
         if(!projectService.existsById(idProject))

@@ -31,6 +31,7 @@ public class ContactController {
         return new ResponseEntity<>(contactService.getAll(), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/{id}")
     public ResponseEntity<Contact> getContact(@PathVariable("id") Integer idContact){
         if(!contactService.existsById(idContact))
@@ -39,6 +40,7 @@ public class ContactController {
         return  new ResponseEntity<Contact>(contact, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/person/{idPerson}")
     public ResponseEntity<List<Contact>> getByPerson(@PathVariable("idPerson") Integer idPerson){
         return contactService.getByPerson(idPerson)
@@ -46,13 +48,13 @@ public class ContactController {
                 .orElse(new ResponseEntity(new Message("No existe"), HttpStatus.NOT_FOUND));
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/inbox/{idPerson}")
     public ResponseEntity<Boolean> existsByIdPerson(@PathVariable("idPerson") Integer idPerson){
         Boolean exists = contactService.existsByIdPerson(idPerson);
         return new ResponseEntity<Boolean>(exists, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody ContactDto contactDto){
     try{
@@ -77,7 +79,7 @@ public class ContactController {
         return new ResponseEntity(new Message("Mensaje de contacto guardado"), HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer idContact){
         if(!contactService.existsById(idContact))
