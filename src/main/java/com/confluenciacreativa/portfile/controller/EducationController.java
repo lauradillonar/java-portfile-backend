@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/educations")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://lvd-portfile.web.app")
 public class EducationController {
 
     private final Log LOGGER = LogFactory.getLog(EducationController.class);
