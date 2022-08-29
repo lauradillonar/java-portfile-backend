@@ -11,6 +11,8 @@ import com.confluenciacreativa.portfile.security.jwt.JwtProvider;
 import com.confluenciacreativa.portfile.security.service.PersonService;
 import com.confluenciacreativa.portfile.security.service.RoleService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +40,8 @@ import java.util.regex.Pattern;
 @CrossOrigin(origins = "http://localhost:4200")
 public class PersonController {
 
+    private final Log LOGGER = LogFactory.getLog(PersonController.class);
+
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -64,6 +68,17 @@ public class PersonController {
             return new ResponseEntity(new Message("No existe"), HttpStatus.NOT_FOUND);
         Person person = personService.getPerson(idPerson).get();
         return new ResponseEntity<Person>(person, HttpStatus.OK);
+    }
+
+    //@PreAuthorize("hasRole('USER')")
+    @GetMapping("/user/{user}")
+    public ResponseEntity<Integer> getId(@PathVariable("user") String userName){
+        if(!personService.existsByUserName(userName)){
+            return new ResponseEntity(new Message("No existe"), HttpStatus.NOT_FOUND);
+        }else{
+            Person person = personService.findByUserName(userName).get();
+            return new ResponseEntity<Integer>(person.getIdPerson(), HttpStatus.OK);
+        }
     }
 
     @PostMapping("/login")

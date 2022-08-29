@@ -59,7 +59,7 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(
                         "/persons/**",
-                        "/contacts/save",
+                        "/contacts/**",
                         "/educations/**",
                         "/experiences/**",
                         "/projects/**",
