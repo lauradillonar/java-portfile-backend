@@ -94,7 +94,7 @@ public class PersonController {
         return new ResponseEntity(jwtDto, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save")
     public ResponseEntity<Integer> save(@Valid @RequestBody PersonDto personDto, BindingResult bindingResult){
         if(StringUtils.isBlank(personDto.getName()))
@@ -186,8 +186,8 @@ public class PersonController {
             return new ResponseEntity(new Message("El nombre es requerido"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(person.getLastname()))
             return new ResponseEntity(new Message("El apellido es requerido"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(person.getUserName()))
-            return new ResponseEntity(new Message("El nombre de usuario es requerido"), HttpStatus.BAD_REQUEST);
+        // if(StringUtils.isBlank(person.getUserName()))
+        //    return new ResponseEntity(new Message("El nombre de usuario es requerido"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(person.getBirthdate().toString()))
             return new ResponseEntity(new Message("La fecha de nacimiento es requerida"), HttpStatus.BAD_REQUEST);
         try{
@@ -203,8 +203,8 @@ public class PersonController {
         if (!emailValidator(person.getEmail()))
             return new ResponseEntity(new Message("Email inválido"), HttpStatus.BAD_REQUEST);
 
-        if(StringUtils.isBlank(person.getPassword()))
-            return new ResponseEntity(new Message("La contraseña es requerida"), HttpStatus.BAD_REQUEST);
+        // if(StringUtils.isBlank(person.getPassword()))
+        //    return new ResponseEntity(new Message("La contraseña es requerida"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(person.getPhone()))
             return new ResponseEntity(new Message("El teléfono es requerido"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(person.getAboutMeSub()))
@@ -221,13 +221,13 @@ public class PersonController {
         Person newPerson = personService.getPerson(idPerson).get();
         newPerson.setName(person.getName());
         newPerson.setLastname(person.getLastname());
-        newPerson.setUserName(person.getUserName());
+        //newPerson.setUserName(person.getUserName());
         newPerson.setBirthdate(person.getBirthdate());
         newPerson.setNationality(person.getNationality());
         newPerson.setEmail(person.getEmail());
-        if(newPerson.getPassword() != person.getPassword()) {
-            newPerson.setPassword(passwordEncoder.encode(person.getPassword()));
-        }
+        //if(newPerson.getPassword() != person.getPassword()) {
+        //    newPerson.setPassword(passwordEncoder.encode(person.getPassword()));
+        //}
         newPerson.setPhone(person.getPhone());
         newPerson.setAboutMeSub(person.getAboutMeSub());
         newPerson.setAboutMe(person.getAboutMe());
@@ -241,7 +241,10 @@ public class PersonController {
         newPerson.setFacebook(person.getFacebook());
         newPerson.setInstagram(person.getInstagram());
         newPerson.setTwitter(person.getTwitter());
+
+        LOGGER.info("La clave es: "+newPerson.getPassword());
         personService.save(newPerson);
+        LOGGER.info("La clave es: "+newPerson.getPassword());
         try {
             return new ResponseEntity(new Message("Datos actualizados"), HttpStatus.OK);
         } catch (Exception e) {
