@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/persons")
-@CrossOrigin(origins = "https://lvd-portfile.web.app")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PersonController {
 
     private final Log LOGGER = LogFactory.getLog(PersonController.class);

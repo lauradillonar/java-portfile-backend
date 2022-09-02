@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/projects")
-@CrossOrigin(origins = "https://lvd-portfile.web.app")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProjectController {
 
     private final Log LOGGER = LogFactory.getLog(ExperienceController.class);
