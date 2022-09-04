@@ -1,7 +1,8 @@
 package com.confluenciacreativa.portfile.entity;
 
+import com.confluenciacreativa.portfile.security.entity.PersonDB;
+
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.constraints.NotNull;
 
 @Entity

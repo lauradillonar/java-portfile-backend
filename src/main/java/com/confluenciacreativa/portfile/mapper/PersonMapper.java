@@ -1,7 +1,7 @@
 package com.confluenciacreativa.portfile.mapper;
 
-import com.confluenciacreativa.portfile.domain.Person;
-import com.confluenciacreativa.portfile.entity.PersonDB;
+import com.confluenciacreativa.portfile.security.dto.Person;
+import com.confluenciacreativa.portfile.security.entity.PersonDB;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -32,7 +32,8 @@ public interface PersonMapper {
             @Mapping(source = "logoUrlDB", target = "logoUrl"),
             @Mapping(source = "facebookDB", target = "facebook"),
             @Mapping(source = "instagramDB", target = "instagram"),
-            @Mapping(source = "twitterDB", target = "twitter")
+            @Mapping(source = "twitterDB", target = "twitter"),
+            @Mapping(source = "roles", target = "roles")
     })
     Person toPerson(PersonDB personDB);
     List<Person> toPersons(List<PersonDB> personsDB);
@@ -43,7 +44,7 @@ public interface PersonMapper {
             @Mapping(target = "educationsDB", ignore = true),
             @Mapping(target = "skillsDB", ignore = true),
             @Mapping(target = "projectsDB", ignore = true),
-            @Mapping(target = "contactsDB", ignore = true)
+            @Mapping(target = "contactsDB", ignore = true),
     })
     PersonDB toPersonDB(Person person);
 }

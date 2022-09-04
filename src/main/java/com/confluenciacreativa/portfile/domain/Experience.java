@@ -15,7 +15,6 @@ public class Experience {
     private String url2;
     private String link3;
     private String url3;
-    private Person person;
 
     public Experience() {
     }
@@ -148,13 +147,5 @@ public class Experience {
 
     public void setUrl3(String url3) {
         this.url3 = url3;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
     }
 }

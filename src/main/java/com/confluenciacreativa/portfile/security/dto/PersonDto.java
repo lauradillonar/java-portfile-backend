@@ -1,6 +1,8 @@
-package com.confluenciacreativa.portfile.dto;
+package com.confluenciacreativa.portfile.security.dto;
 
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
+import java.util.Set;
 
 public class PersonDto {
 
@@ -50,6 +52,8 @@ public class PersonDto {
     private String instagram;
     private String twitter;
 
+    private Set<String> roles = new HashSet<>();
+
     public PersonDto() {
     }
 
@@ -73,7 +77,8 @@ public class PersonDto {
             String logoUrl,
             String facebook,
             String instagram,
-            String twitter) {
+            String twitter,
+            Set<String> roles) {
         this.name = name;
         this.lastname = lastname;
         this.userName = userName;
@@ -94,6 +99,7 @@ public class PersonDto {
         this.facebook = facebook;
         this.instagram = instagram;
         this.twitter = twitter;
+        this.roles = roles;
     }
 
     public String getName() {
@@ -254,5 +260,13 @@ public class PersonDto {
 
     public void setTwitter(String twitter) {
         this.twitter = twitter;
+    }
+
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
     }
 }

@@ -19,13 +19,14 @@ public interface ProjectMapper {
             @Mapping(source= "fontawesomeDB", target = "fontawesome"),
             @Mapping(source= "letterDB", target = "letter"),
             @Mapping(source= "textDB", target = "text"),
-            @Mapping(source= "viewmoreDB", target = "viewmore"),
-            @Mapping(source= "personDB", target = "person"),
-
+            @Mapping(source= "viewmoreDB", target = "viewmore")
     })
     Project toProject(ProjectDB projectDB);
     List<Project> toProjects(List<ProjectDB> projectsDB);
 
     @InheritInverseConfiguration
+    @Mappings({
+            @Mapping(target = "personDB", ignore = true)
+    })
     ProjectDB toProjectDB(Project project);
 }

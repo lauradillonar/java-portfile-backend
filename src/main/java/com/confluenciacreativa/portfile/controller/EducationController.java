@@ -10,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class EducationController {
     @Autowired
     private EducationService educationService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
     public ResponseEntity<List<Education>> getAll(){
         return new ResponseEntity<>(educationService.getAll(), HttpStatus.OK);
@@ -44,6 +46,7 @@ public class EducationController {
                 .orElse(new ResponseEntity(new Message("No existe"), HttpStatus.NOT_FOUND));
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/save/{idPerson}")
     public ResponseEntity<?> save(@PathVariable("idPerson") Integer idPerson, @RequestBody EducationDto educationDto){
     try{
@@ -57,6 +60,8 @@ public class EducationController {
             return new ResponseEntity(new Message("Una descripción es requerida"), HttpStatus.BAD_REQUEST);
         if(educationService.existsByTitleAndIdPerson(educationDto.getTitle(), idPerson))
             return new ResponseEntity(new Message("Esos datos de educación ya existen"), HttpStatus.BAD_REQUEST);
+        if(idPerson != educationDto.getIdPerson())
+            return new ResponseEntity(new Message("No autorizado"), HttpStatus.BAD_REQUEST);
     }catch(Exception e){
         return new ResponseEntity(new Message("Datos inválidos"), HttpStatus.BAD_REQUEST);
     }
@@ -75,6 +80,7 @@ public class EducationController {
         return new ResponseEntity(new Message("Datos de educación agregados"), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PutMapping("/update/{idPerson}/{idEducation}")
     public ResponseEntity<?> update(
             @PathVariable("idPerson") Integer idPerson,
@@ -99,6 +105,8 @@ public class EducationController {
             return new ResponseEntity(new Message("Esos datos de educación ya existen"), HttpStatus.BAD_REQUEST);
         if(idPerson != educationService.getEducation(education.getIdEducation()).get().getIdPerson())
             return new ResponseEntity(new Message("No autorizado"), HttpStatus.BAD_REQUEST);
+        if(idPerson != education.getIdPerson())
+            return new ResponseEntity(new Message("No autorizado"), HttpStatus.BAD_REQUEST);
     }catch(Exception e){
         return new ResponseEntity(new Message("Datos inválidos"), HttpStatus.BAD_REQUEST);
     }
@@ -117,6 +125,7 @@ public class EducationController {
         return new ResponseEntity(new Message("Datos actualizados"), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer idEducation){
         if(!educationService.existsById(idEducation))

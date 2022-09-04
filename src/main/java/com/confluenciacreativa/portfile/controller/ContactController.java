@@ -10,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,11 +25,13 @@ public class ContactController {
     @Autowired
     private ContactService contactService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
     public ResponseEntity<List<Contact>> getAll(){
         return new ResponseEntity<>(contactService.getAll(), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/{id}")
     public ResponseEntity<Contact> getContact(@PathVariable("id") Integer idContact){
         if(!contactService.existsById(idContact))
@@ -37,6 +40,7 @@ public class ContactController {
         return  new ResponseEntity<Contact>(contact, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/person/{idPerson}")
     public ResponseEntity<List<Contact>> getByPerson(@PathVariable("idPerson") Integer idPerson){
         return contactService.getByPerson(idPerson)
@@ -44,6 +48,7 @@ public class ContactController {
                 .orElse(new ResponseEntity(new Message("No existe"), HttpStatus.NOT_FOUND));
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/inbox/{idPerson}")
     public ResponseEntity<Boolean> existsByIdPerson(@PathVariable("idPerson") Integer idPerson){
         Boolean exists = contactService.existsByIdPerson(idPerson);
@@ -74,6 +79,7 @@ public class ContactController {
         return new ResponseEntity(new Message("Mensaje de contacto guardado"), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer idContact){
         if(!contactService.existsById(idContact))

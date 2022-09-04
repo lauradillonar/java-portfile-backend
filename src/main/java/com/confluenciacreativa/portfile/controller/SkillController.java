@@ -10,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class SkillController {
     @Autowired
     private SkillService skillService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
     public ResponseEntity<List<Skill>> getAll() {
         return new ResponseEntity<>(skillService.getAll(), HttpStatus.OK);
@@ -44,6 +46,7 @@ public class SkillController {
                 .orElse(new ResponseEntity(new Message("No existe"), HttpStatus.NOT_FOUND));
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/save/{idPerson}")
     public ResponseEntity<?> save(@PathVariable("idPerson") Integer idPerson,@RequestBody SkillDto skillDto){
     try{
@@ -55,6 +58,8 @@ public class SkillController {
             return new ResponseEntity(new Message("Ingresa un valor de progreso adecuado"), HttpStatus.BAD_REQUEST);
         if(skillService.existsByItemAndIdPerson(skillDto.getItem(), idPerson))
             return new ResponseEntity(new Message("Esa tecnología ya existe"), HttpStatus.BAD_REQUEST);
+        if(idPerson != skillDto.getIdPerson())
+            return new ResponseEntity(new Message("No autorizado"), HttpStatus.BAD_REQUEST);
     }catch(Exception e){
         return new ResponseEntity(new Message("Datos inválidos"), HttpStatus.BAD_REQUEST);
     }
@@ -67,6 +72,7 @@ public class SkillController {
         return new ResponseEntity(new Message("Tecnología agregada"), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PutMapping("/update/{idPerson}/{idSkill}")
     public ResponseEntity<?> update(
             @PathVariable("idPerson") Integer idPerson,
@@ -89,6 +95,8 @@ public class SkillController {
             return  new ResponseEntity(new Message("Esa tecnología ya existe"), HttpStatus.BAD_REQUEST);
         if(idPerson != skillService.getSkill(skill.getIdSkill()).get().getIdPerson())
             return new ResponseEntity(new Message("No autorizado"), HttpStatus.BAD_REQUEST);
+        if(idPerson != skill.getIdPerson())
+            return new ResponseEntity(new Message("No autorizado"), HttpStatus.BAD_REQUEST);
     }catch(Exception e){
         return new ResponseEntity(new Message("Datos inválidos"), HttpStatus.BAD_REQUEST);
     }
@@ -101,10 +109,11 @@ public class SkillController {
         return new ResponseEntity(new Message("Datos actualizados"), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer idSkill){
         if(!skillService.existsById(idSkill))
-            return new ResponseEntity(new Message("No exite"), HttpStatus.OK);
+            return new ResponseEntity(new Message("No existe"), HttpStatus.OK);
         try {
             skillService.delete(idSkill);
             return new ResponseEntity(new Message("Tecnología borrada"), HttpStatus.OK);

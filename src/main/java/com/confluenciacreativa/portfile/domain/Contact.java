@@ -7,7 +7,6 @@ public class Contact {
     private String textName;
     private String textEmail;
     private String textMessage;
-    private Person person;
 
     public Contact() {
     }
@@ -60,13 +59,5 @@ public class Contact {
 
     public void setTextMessage(String textMessage) {
         this.textMessage = textMessage;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
     }
 }

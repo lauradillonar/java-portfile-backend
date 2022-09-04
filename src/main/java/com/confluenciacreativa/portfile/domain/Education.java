@@ -12,7 +12,6 @@ public class Education {
     private String url;
     private String text2;
     private String viewmore;
-    private Person person;
 
     public Education() {
     }
@@ -115,13 +114,5 @@ public class Education {
 
     public void setViewmore(String viewmore) {
         this.viewmore = viewmore;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
     }
 }

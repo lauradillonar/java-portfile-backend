@@ -24,12 +24,14 @@ public interface ExperienceMapper {
             @Mapping(source="link2DB", target = "link2"),
             @Mapping(source="url2DB", target = "url2"),
             @Mapping(source="link3DB", target = "link3"),
-            @Mapping(source="url3DB", target = "url3"),
-            @Mapping(source="personDB", target = "person")
+            @Mapping(source="url3DB", target = "url3")
     })
     Experience toExperience(ExperienceDB experienceDB);
     List<Experience> toExperiences(List<ExperienceDB> experiencesDB);
 
     @InheritInverseConfiguration
+    @Mappings({
+            @Mapping(target = "personDB", ignore = true)
+    })
     ExperienceDB toExperienceDB(Experience experience);
 }

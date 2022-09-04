@@ -1,7 +1,7 @@
-package com.confluenciacreativa.portfile.service;
+package com.confluenciacreativa.portfile.security.service;
 
-import com.confluenciacreativa.portfile.domain.Person;
-import com.confluenciacreativa.portfile.repository.PersonRepository;
+import com.confluenciacreativa.portfile.security.dto.Person;
+import com.confluenciacreativa.portfile.security.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

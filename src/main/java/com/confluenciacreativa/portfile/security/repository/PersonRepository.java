@@ -1,6 +1,6 @@
-package com.confluenciacreativa.portfile.repository;
+package com.confluenciacreativa.portfile.security.repository;
 
-import com.confluenciacreativa.portfile.domain.Person;
+import com.confluenciacreativa.portfile.security.dto.Person;
 
 import java.util.List;
 import java.util.Optional;

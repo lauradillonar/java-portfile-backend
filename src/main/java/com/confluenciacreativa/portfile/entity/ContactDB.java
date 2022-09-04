@@ -1,5 +1,7 @@
 package com.confluenciacreativa.portfile.entity;
 
+import com.confluenciacreativa.portfile.security.entity.PersonDB;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
